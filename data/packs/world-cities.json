@@ -1,0 +1,48 @@
+{
+  "id": "world-cities",
+  "version": "1.0",
+  "meta": {
+    "title": "World Cities",
+    "description": "Spin for your next dream destination.",
+    "icon": "✈️",
+    "defaultAnimation": "slot",
+    "tags": ["travel", "cities", "world", "destinations", "vacation", "adventure"],
+    "hierarchy": { "level1": "Travel", "level2": "World Cities" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "continent": { "label": "Continent", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "continent": ["Europe", "Asia", "Americas", "Africa", "Oceania", "Middle East"]
+  },
+  "items": [
+    { "value": "Paris", "filters": { "continent": ["Europe"] } },
+    { "value": "Rome", "filters": { "continent": ["Europe"] } },
+    { "value": "Amsterdam", "filters": { "continent": ["Europe"] } },
+    { "value": "Barcelona", "filters": { "continent": ["Europe"] } },
+    { "value": "Lisbon", "filters": { "continent": ["Europe"] } },
+    { "value": "Copenhagen", "filters": { "continent": ["Europe"] } },
+    { "value": "Vienna", "filters": { "continent": ["Europe"] } },
+    { "value": "Prague", "filters": { "continent": ["Europe"] } },
+    { "value": "Istanbul", "filters": { "continent": ["Europe", "Middle East"] } },
+    { "value": "Tokyo", "filters": { "continent": ["Asia"] } },
+    { "value": "Kyoto", "filters": { "continent": ["Asia"] } },
+    { "value": "Seoul", "filters": { "continent": ["Asia"] } },
+    { "value": "Bangkok", "filters": { "continent": ["Asia"] } },
+    { "value": "Singapore", "filters": { "continent": ["Asia"] } },
+    { "value": "Bali", "filters": { "continent": ["Asia"] } },
+    { "value": "Mumbai", "filters": { "continent": ["Asia"] } },
+    { "value": "New York", "filters": { "continent": ["Americas"] } },
+    { "value": "Mexico City", "filters": { "continent": ["Americas"] } },
+    { "value": "Buenos Aires", "filters": { "continent": ["Americas"] } },
+    { "value": "Cartagena", "filters": { "continent": ["Americas"] } },
+    { "value": "Marrakech", "filters": { "continent": ["Africa"] } },
+    { "value": "Cape Town", "filters": { "continent": ["Africa"] } },
+    { "value": "Sydney", "filters": { "continent": ["Oceania"] } },
+    { "value": "Queenstown", "filters": { "continent": ["Oceania"] } },
+    { "value": "Dubai", "filters": { "continent": ["Middle East"] } },
+    { "value": "Tel Aviv", "filters": { "continent": ["Middle East"] } }
+  ],
+  "sampling": { "replacement": true }
+}

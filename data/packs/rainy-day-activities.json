@@ -1,0 +1,22 @@
+{
+  "id": "rainy-day-activities",
+  "version": "1.0",
+  "meta": {
+    "title": "Rainy Day Activities",
+    "description": "Stuck inside? Spin for something fun.",
+    "icon": "🌧️",
+    "defaultAnimation": "slot",
+    "tags": ["kids", "rainy day", "indoor", "activities", "fun"],
+    "hierarchy": { "level1": "Kids", "level2": "Rainy Day Activities" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Board game marathon" }, { "value": "Bake cookies" }, { "value": "Movie marathon" },
+    { "value": "Build a blanket fort" }, { "value": "Watercolor painting" }, { "value": "Write a story" },
+    { "value": "Origami" }, { "value": "Science experiment" }, { "value": "Learn card tricks" },
+    { "value": "Puzzle day" }, { "value": "Make homemade pizza" }, { "value": "Sock puppet theater" },
+    { "value": "Scrapbook" }, { "value": "Write letters to friends" }, { "value": "Finger knitting" },
+    { "value": "Indoor treasure hunt" }, { "value": "Learn a magic trick" }, { "value": "Comic book" }
+  ],
+  "sampling": { "replacement": true }
+}

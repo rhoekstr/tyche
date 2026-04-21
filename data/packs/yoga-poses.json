@@ -1,0 +1,24 @@
+{
+  "id": "yoga-poses",
+  "version": "1.0",
+  "meta": {
+    "title": "Yoga Poses",
+    "description": "Spin for your next pose.",
+    "icon": "🧘",
+    "defaultAnimation": "card",
+    "tags": ["fitness", "yoga", "poses", "stretching", "mindfulness", "wellness"],
+    "hierarchy": { "level1": "Fitness", "level2": "Yoga Poses" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Downward Dog" }, { "value": "Warrior I" }, { "value": "Warrior II" },
+    { "value": "Warrior III" }, { "value": "Triangle Pose" }, { "value": "Tree Pose" },
+    { "value": "Chair Pose" }, { "value": "Child's Pose" }, { "value": "Cobra" },
+    { "value": "Upward Dog" }, { "value": "Bridge Pose" }, { "value": "Pigeon Pose" },
+    { "value": "Camel Pose" }, { "value": "Crow Pose" }, { "value": "Headstand" },
+    { "value": "Handstand" }, { "value": "Half Moon" }, { "value": "Eagle Pose" },
+    { "value": "Boat Pose" }, { "value": "Seated Forward Fold" }, { "value": "Supine Twist" },
+    { "value": "Plank" }, { "value": "Side Plank" }, { "value": "Happy Baby" }
+  ],
+  "sampling": { "replacement": true }
+}

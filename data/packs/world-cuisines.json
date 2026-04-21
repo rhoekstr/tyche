@@ -1,0 +1,40 @@
+{
+  "id": "world-cuisines",
+  "version": "1.0",
+  "meta": {
+    "title": "World Cuisines",
+    "description": "Pick a cuisine from around the world.",
+    "icon": "🌍",
+    "defaultAnimation": "slot",
+    "tags": ["food", "cuisine", "dining", "world", "restaurants"],
+    "hierarchy": { "level1": "Food & Drink", "level2": "Cuisines" },
+    "source": "official",
+    "submittedBy": null
+  },
+  "filters": {
+    "region": { "label": "Region", "multiSelect": true },
+    "spice": { "label": "Spice Level", "multiSelect": true }
+  },
+  "items": [
+    { "value": "Italian", "filters": { "region": ["Europe"], "spice": ["Mild"] } },
+    { "value": "French", "filters": { "region": ["Europe"], "spice": ["Mild"] } },
+    { "value": "Spanish", "filters": { "region": ["Europe"], "spice": ["Mild", "Medium"] } },
+    { "value": "Greek", "filters": { "region": ["Europe"], "spice": ["Mild"] } },
+    { "value": "Japanese", "filters": { "region": ["Asia"], "spice": ["Mild", "Medium"] } },
+    { "value": "Thai", "filters": { "region": ["Asia"], "spice": ["Medium", "Hot"] } },
+    { "value": "Korean", "filters": { "region": ["Asia"], "spice": ["Medium", "Hot"] } },
+    { "value": "Vietnamese", "filters": { "region": ["Asia"], "spice": ["Mild", "Medium"] } },
+    { "value": "Indian", "filters": { "region": ["Asia"], "spice": ["Medium", "Hot"] } },
+    { "value": "Chinese", "filters": { "region": ["Asia"], "spice": ["Mild", "Medium", "Hot"] } },
+    { "value": "Mexican", "filters": { "region": ["Americas"], "spice": ["Medium", "Hot"] } },
+    { "value": "Peruvian", "filters": { "region": ["Americas"], "spice": ["Medium"] } },
+    { "value": "Brazilian", "filters": { "region": ["Americas"], "spice": ["Mild", "Medium"] } },
+    { "value": "Cajun", "filters": { "region": ["Americas"], "spice": ["Hot"] } },
+    { "value": "Ethiopian", "filters": { "region": ["Africa"], "spice": ["Medium", "Hot"] } },
+    { "value": "Moroccan", "filters": { "region": ["Africa"], "spice": ["Medium"] } },
+    { "value": "Lebanese", "filters": { "region": ["Middle East"], "spice": ["Mild", "Medium"] } },
+    { "value": "Turkish", "filters": { "region": ["Middle East"], "spice": ["Mild", "Medium"] } },
+    { "value": "Israeli", "filters": { "region": ["Middle East"], "spice": ["Mild", "Medium"] } }
+  ],
+  "sampling": { "replacement": true }
+}

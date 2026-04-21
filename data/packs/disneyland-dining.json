@@ -1,0 +1,45 @@
+{
+  "id": "disneyland-dining",
+  "version": "1.0",
+  "meta": {
+    "title": "Disneyland Dining",
+    "description": "Restaurants & eateries at Disneyland Resort.",
+    "icon": "🍽️",
+    "defaultAnimation": "slot",
+    "tags": ["disney", "dining", "disneyland", "anaheim", "food", "restaurants"],
+    "hierarchy": { "level1": "Disney", "level2": "Disneyland", "level3": "Dining" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "park": { "label": "Location", "multiSelect": true },
+    "type": { "label": "Service Type", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "park": ["Disneyland Park", "Disney California Adventure", "Downtown Disney"],
+    "type": ["Table Service", "Quick Service", "Snack"]
+  },
+  "items": [
+    { "value": "Blue Bayou Restaurant", "filters": { "park": ["Disneyland Park"], "type": ["Table Service"] } },
+    { "value": "Café Orleans", "filters": { "park": ["Disneyland Park"], "type": ["Table Service"] } },
+    { "value": "Plaza Inn", "filters": { "park": ["Disneyland Park"], "type": ["Quick Service"] } },
+    { "value": "Jolly Holiday Bakery Café", "filters": { "park": ["Disneyland Park"], "type": ["Quick Service"] } },
+    { "value": "Bengal Barbecue", "filters": { "park": ["Disneyland Park"], "type": ["Snack"] } },
+    { "value": "Galactic Grill", "filters": { "park": ["Disneyland Park"], "type": ["Quick Service"] } },
+    { "value": "Rancho del Zócalo", "filters": { "park": ["Disneyland Park"], "type": ["Quick Service"] } },
+    { "value": "Royal Street Veranda", "filters": { "park": ["Disneyland Park"], "type": ["Snack"] } },
+    { "value": "Carnation Café", "filters": { "park": ["Disneyland Park"], "type": ["Table Service"] } },
+    { "value": "Oga's Cantina", "filters": { "park": ["Disneyland Park"], "type": ["Snack"] } },
+    { "value": "Carthay Circle Restaurant", "filters": { "park": ["Disney California Adventure"], "type": ["Table Service"] } },
+    { "value": "Lamplight Lounge", "filters": { "park": ["Disney California Adventure"], "type": ["Table Service"] } },
+    { "value": "Pym Test Kitchen", "filters": { "park": ["Disney California Adventure"], "type": ["Quick Service"] } },
+    { "value": "Flo's V8 Café", "filters": { "park": ["Disney California Adventure"], "type": ["Quick Service"] } },
+    { "value": "Shawarma Palace", "filters": { "park": ["Disney California Adventure"], "type": ["Quick Service"] } },
+    { "value": "Pacific Wharf Café", "filters": { "park": ["Disney California Adventure"], "type": ["Quick Service"] } },
+    { "value": "Boardwalk Pizza & Pasta", "filters": { "park": ["Disney California Adventure"], "type": ["Quick Service"] } },
+    { "value": "Storytellers Café (Grand Californian)", "filters": { "park": ["Downtown Disney"], "type": ["Table Service"] } },
+    { "value": "Trader Sam's Enchanted Tiki Bar", "filters": { "park": ["Downtown Disney"], "type": ["Table Service"] } },
+    { "value": "Naples Ristorante e Bar", "filters": { "park": ["Downtown Disney"], "type": ["Table Service"] } },
+    { "value": "Jazz Kitchen", "filters": { "park": ["Downtown Disney"], "type": ["Table Service"] } }
+  ],
+  "sampling": { "replacement": true }
+}

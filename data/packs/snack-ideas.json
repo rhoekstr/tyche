@@ -1,0 +1,22 @@
+{
+  "id": "snack-ideas",
+  "version": "1.0",
+  "meta": {
+    "title": "Snack Ideas",
+    "description": "Can't decide what to snack on? Spin it.",
+    "icon": "🍿",
+    "defaultAnimation": "slot",
+    "tags": ["kids", "snacks", "food", "treats", "quick"],
+    "hierarchy": { "level1": "Kids", "level2": "Snack Ideas" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Apple slices & peanut butter" }, { "value": "Cheese & crackers" },
+    { "value": "Popcorn" }, { "value": "Trail mix" }, { "value": "Hummus & veggies" },
+    { "value": "Yogurt parfait" }, { "value": "Fruit skewers" }, { "value": "Ants on a log" },
+    { "value": "Frozen grapes" }, { "value": "Quesadilla" }, { "value": "Edamame" },
+    { "value": "Rice cakes & avocado" }, { "value": "Smoothie" }, { "value": "Nachos" },
+    { "value": "Hard-boiled eggs" }, { "value": "Pita & tzatziki" }, { "value": "Banana nice cream" }
+  ],
+  "sampling": { "replacement": true }
+}

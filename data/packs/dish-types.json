@@ -1,0 +1,22 @@
+{
+  "id": "dish-types",
+  "version": "1.0",
+  "meta": {
+    "title": "Dish Types",
+    "description": "What style of meal are you in the mood for?",
+    "icon": "🍽️",
+    "defaultAnimation": "slot",
+    "tags": ["food", "meal", "dish", "cooking", "dining"],
+    "hierarchy": { "level1": "Food & Drink", "level2": "Dish Types" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Soup" }, { "value": "Salad" }, { "value": "Sandwich" }, { "value": "Burger" },
+    { "value": "Pizza" }, { "value": "Pasta" }, { "value": "Tacos" }, { "value": "Sushi" },
+    { "value": "Stir Fry" }, { "value": "Curry" }, { "value": "Grilled Meats" }, { "value": "Stew" },
+    { "value": "Ramen" }, { "value": "Dim Sum" }, { "value": "Seafood" }, { "value": "BBQ" },
+    { "value": "Flatbread" }, { "value": "Rice Bowl" }, { "value": "Dumplings" }, { "value": "Charcuterie" },
+    { "value": "Grain Bowl" }, { "value": "Noodles" }, { "value": "Wraps" }, { "value": "Roast" }
+  ],
+  "sampling": { "replacement": true }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "wdw-rides",
+  "version": "1.0",
+  "meta": {
+    "title": "Walt Disney World Rides",
+    "description": "Attractions across all WDW parks.",
+    "icon": "🎢",
+    "defaultAnimation": "slot",
+    "tags": ["disney", "rides", "wdw", "attractions", "orlando", "thrill"],
+    "hierarchy": { "level1": "Disney", "level2": "Walt Disney World", "level3": "Rides" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "park": { "label": "Park", "multiSelect": true },
+    "thrillLevel": { "label": "Thrill Level", "multiSelect": true },
+    "heightRequired": { "label": "Height Requirement", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "park": ["Magic Kingdom", "EPCOT", "Hollywood Studios", "Animal Kingdom"],
+    "thrillLevel": ["Low", "Moderate", "High"],
+    "heightRequired": ["None", "32in", "40in", "44in", "48in"]
+  },
+  "items": [
+    { "value": "Space Mountain", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["High"], "heightRequired": ["44in"] } },
+    { "value": "Big Thunder Mountain", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Moderate"], "heightRequired": ["40in"] } },
+    { "value": "Haunted Mansion", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Pirates of the Caribbean", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Splash Mountain (Tiana's)", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Moderate"], "heightRequired": ["40in"] } },
+    { "value": "Seven Dwarfs Mine Train", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Moderate"], "heightRequired": ["38in"] } },
+    { "value": "Tomorrowland Speedway", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Buzz Lightyear's Space Ranger Spin", "filters": { "park": ["Magic Kingdom"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Guardians of the Galaxy: Cosmic Rewind", "filters": { "park": ["EPCOT"], "thrillLevel": ["High"], "heightRequired": ["40in"] } },
+    { "value": "Test Track", "filters": { "park": ["EPCOT"], "thrillLevel": ["Moderate"], "heightRequired": ["40in"] } },
+    { "value": "Frozen Ever After", "filters": { "park": ["EPCOT"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Remy's Ratatouille Adventure", "filters": { "park": ["EPCOT"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Soarin' Around the World", "filters": { "park": ["EPCOT"], "thrillLevel": ["Low"], "heightRequired": ["40in"] } },
+    { "value": "Mission: SPACE", "filters": { "park": ["EPCOT"], "thrillLevel": ["High"], "heightRequired": ["44in"] } },
+    { "value": "Star Wars: Rise of the Resistance", "filters": { "park": ["Hollywood Studios"], "thrillLevel": ["Moderate"], "heightRequired": ["40in"] } },
+    { "value": "Millennium Falcon: Smugglers Run", "filters": { "park": ["Hollywood Studios"], "thrillLevel": ["Moderate"], "heightRequired": ["38in"] } },
+    { "value": "Tower of Terror", "filters": { "park": ["Hollywood Studios"], "thrillLevel": ["High"], "heightRequired": ["40in"] } },
+    { "value": "Rock 'n' Roller Coaster", "filters": { "park": ["Hollywood Studios"], "thrillLevel": ["High"], "heightRequired": ["48in"] } },
+    { "value": "Slinky Dog Dash", "filters": { "park": ["Hollywood Studios"], "thrillLevel": ["Moderate"], "heightRequired": ["38in"] } },
+    { "value": "Alien Swirling Saucers", "filters": { "park": ["Hollywood Studios"], "thrillLevel": ["Low"], "heightRequired": ["32in"] } },
+    { "value": "Avatar Flight of Passage", "filters": { "park": ["Animal Kingdom"], "thrillLevel": ["High"], "heightRequired": ["44in"] } },
+    { "value": "Na'vi River Journey", "filters": { "park": ["Animal Kingdom"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "Expedition Everest", "filters": { "park": ["Animal Kingdom"], "thrillLevel": ["High"], "heightRequired": ["44in"] } },
+    { "value": "Kilimanjaro Safaris", "filters": { "park": ["Animal Kingdom"], "thrillLevel": ["Low"], "heightRequired": ["None"] } },
+    { "value": "DINOSAUR", "filters": { "park": ["Animal Kingdom"], "thrillLevel": ["Moderate"], "heightRequired": ["40in"] } }
+  ],
+  "sampling": { "replacement": true }
+}

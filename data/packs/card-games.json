@@ -1,0 +1,44 @@
+{
+  "id": "card-games",
+  "version": "1.0",
+  "meta": {
+    "title": "Card Games",
+    "description": "Spin for what card game to play tonight.",
+    "icon": "🃏",
+    "defaultAnimation": "card",
+    "tags": ["games", "cards", "card games", "tabletop", "party"],
+    "hierarchy": { "level1": "Games", "level2": "Card Games" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "players": { "label": "Players", "multiSelect": true },
+    "style": { "label": "Style", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "players": ["2", "3–4", "5+"],
+    "style": ["Classic", "Strategy", "Party", "Bluffing"]
+  },
+  "items": [
+    { "value": "Poker", "filters": { "players": ["3–4", "5+"], "style": ["Classic", "Bluffing"] } },
+    { "value": "Rummy", "filters": { "players": ["2", "3–4"], "style": ["Classic"] } },
+    { "value": "Gin Rummy", "filters": { "players": ["2"], "style": ["Classic"] } },
+    { "value": "Go Fish", "filters": { "players": ["2", "3–4"], "style": ["Classic"] } },
+    { "value": "War", "filters": { "players": ["2"], "style": ["Classic"] } },
+    { "value": "Cribbage", "filters": { "players": ["2"], "style": ["Classic", "Strategy"] } },
+    { "value": "Euchre", "filters": { "players": ["3–4"], "style": ["Classic"] } },
+    { "value": "Hearts", "filters": { "players": ["3–4"], "style": ["Classic", "Strategy"] } },
+    { "value": "Spades", "filters": { "players": ["3–4", "5+"], "style": ["Classic", "Strategy"] } },
+    { "value": "Canasta", "filters": { "players": ["3–4"], "style": ["Classic", "Strategy"] } },
+    { "value": "Solitaire", "filters": { "players": ["2"], "style": ["Classic"] } },
+    { "value": "Uno", "filters": { "players": ["2", "3–4", "5+"], "style": ["Party"] } },
+    { "value": "Skip-Bo", "filters": { "players": ["2", "3–4"], "style": ["Party", "Strategy"] } },
+    { "value": "Phase 10", "filters": { "players": ["2", "3–4", "5+"], "style": ["Party", "Strategy"] } },
+    { "value": "Exploding Kittens", "filters": { "players": ["2", "3–4", "5+"], "style": ["Party"] } },
+    { "value": "Coup", "filters": { "players": ["3–4", "5+"], "style": ["Bluffing", "Strategy"] } },
+    { "value": "Love Letter", "filters": { "players": ["2", "3–4"], "style": ["Bluffing", "Strategy"] } },
+    { "value": "Skull", "filters": { "players": ["3–4", "5+"], "style": ["Bluffing"] } },
+    { "value": "Sushi Go", "filters": { "players": ["2", "3–4", "5+"], "style": ["Strategy", "Party"] } },
+    { "value": "Blink", "filters": { "players": ["2"], "style": ["Party"] } }
+  ],
+  "sampling": { "replacement": true }
+}

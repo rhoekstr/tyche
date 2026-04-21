@@ -1,0 +1,23 @@
+{
+  "id": "breakfast-options",
+  "version": "1.0",
+  "meta": {
+    "title": "Breakfast Options",
+    "description": "What's for breakfast? Let fate decide.",
+    "icon": "🍳",
+    "defaultAnimation": "slot",
+    "tags": ["food", "breakfast", "brunch", "morning", "meals"],
+    "hierarchy": { "level1": "Food & Drink", "level2": "Breakfast" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Pancakes" }, { "value": "Waffles" }, { "value": "French Toast" },
+    { "value": "Eggs Benedict" }, { "value": "Avocado Toast" }, { "value": "Omelette" },
+    { "value": "Bagel & Lox" }, { "value": "Granola & Yogurt" }, { "value": "Smoothie Bowl" },
+    { "value": "Breakfast Burrito" }, { "value": "Shakshuka" }, { "value": "Overnight Oats" },
+    { "value": "Croissant" }, { "value": "Acai Bowl" }, { "value": "Full English" },
+    { "value": "Crepes" }, { "value": "Breakfast Sandwich" }, { "value": "Dim Sum" },
+    { "value": "Ful Medames" }, { "value": "Congee" }
+  ],
+  "sampling": { "replacement": true }
+}

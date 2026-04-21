@@ -1,0 +1,22 @@
+{
+  "id": "summer-activities",
+  "version": "1.0",
+  "meta": {
+    "title": "Summer Activities",
+    "description": "Beat boredom with a random summer activity.",
+    "icon": "☀️",
+    "defaultAnimation": "slot",
+    "tags": ["kids", "summer", "activities", "outdoor", "fun"],
+    "hierarchy": { "level1": "Kids", "level2": "Summer Activities" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Water balloon fight" }, { "value": "Lemonade stand" }, { "value": "Bike ride" },
+    { "value": "Backyard camping" }, { "value": "Nature scavenger hunt" }, { "value": "Paint rocks" },
+    { "value": "Make ice cream" }, { "value": "Slip 'n slide" }, { "value": "Visit a farmer's market" },
+    { "value": "Fly a kite" }, { "value": "Sidewalk chalk art" }, { "value": "Catch fireflies" },
+    { "value": "Build a fort" }, { "value": "Start a garden" }, { "value": "Visit the library" },
+    { "value": "Stargazing night" }, { "value": "Tie-dye shirts" }, { "value": "Obstacle course" }
+  ],
+  "sampling": { "replacement": true }
+}

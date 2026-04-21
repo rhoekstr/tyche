@@ -1,0 +1,38 @@
+{
+  "id": "cocktails",
+  "version": "1.0",
+  "meta": {
+    "title": "Cocktails & Mocktails",
+    "description": "Spin for your next drink order.",
+    "icon": "🍹",
+    "defaultAnimation": "slot",
+    "tags": ["drinks", "cocktails", "mocktails", "bar", "beverages"],
+    "hierarchy": { "level1": "Food & Drink", "level2": "Cocktails & Mocktails" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "type": { "label": "Type", "multiSelect": true }
+  },
+  "defaultFilters": { "type": ["Cocktail", "Mocktail"] },
+  "items": [
+    { "value": "Margarita", "filters": { "type": ["Cocktail"] } },
+    { "value": "Old Fashioned", "filters": { "type": ["Cocktail"] } },
+    { "value": "Negroni", "filters": { "type": ["Cocktail"] } },
+    { "value": "Moscow Mule", "filters": { "type": ["Cocktail"] } },
+    { "value": "Aperol Spritz", "filters": { "type": ["Cocktail"] } },
+    { "value": "Daiquiri", "filters": { "type": ["Cocktail"] } },
+    { "value": "Paloma", "filters": { "type": ["Cocktail"] } },
+    { "value": "Whiskey Sour", "filters": { "type": ["Cocktail"] } },
+    { "value": "Espresso Martini", "filters": { "type": ["Cocktail"] } },
+    { "value": "Mojito", "filters": { "type": ["Cocktail"] } },
+    { "value": "Gin & Tonic", "filters": { "type": ["Cocktail"] } },
+    { "value": "Hugo Spritz", "filters": { "type": ["Cocktail"] } },
+    { "value": "Shirley Temple", "filters": { "type": ["Mocktail"] } },
+    { "value": "Virgin Mojito", "filters": { "type": ["Mocktail"] } },
+    { "value": "Watermelon Agua Fresca", "filters": { "type": ["Mocktail"] } },
+    { "value": "Sparkling Lemonade", "filters": { "type": ["Mocktail"] } },
+    { "value": "Cucumber Mint Cooler", "filters": { "type": ["Mocktail"] } },
+    { "value": "Arnold Palmer", "filters": { "type": ["Mocktail"] } }
+  ],
+  "sampling": { "replacement": true }
+}

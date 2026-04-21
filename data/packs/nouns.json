@@ -1,0 +1,23 @@
+{
+  "id": "nouns",
+  "version": "1.0",
+  "meta": {
+    "title": "Nouns",
+    "description": "Random nouns for creative prompts.",
+    "icon": "📦",
+    "defaultAnimation": "slot",
+    "tags": ["creative", "nouns", "writing", "prompts", "words"],
+    "hierarchy": { "level1": "Creative", "level2": "Words", "level3": "Nouns" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Mirror" }, { "value": "Clock" }, { "value": "Lighthouse" }, { "value": "Compass" },
+    { "value": "Telescope" }, { "value": "Lantern" }, { "value": "Labyrinth" }, { "value": "Feather" },
+    { "value": "Cathedral" }, { "value": "Amulet" }, { "value": "Shipwreck" }, { "value": "Oracle" },
+    { "value": "Volcano" }, { "value": "Archive" }, { "value": "Carnival" }, { "value": "Specter" },
+    { "value": "Garden" }, { "value": "Fortress" }, { "value": "Codex" }, { "value": "Automaton" },
+    { "value": "Storm" }, { "value": "Tapestry" }, { "value": "Hieroglyph" }, { "value": "Alchemist" },
+    { "value": "Portal" }, { "value": "Totem" }, { "value": "Foundry" }, { "value": "Nomad" }
+  ],
+  "sampling": { "replacement": true }
+}
