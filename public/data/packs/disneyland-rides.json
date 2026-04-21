@@ -1,0 +1,39 @@
+{
+  "id": "disneyland-rides",
+  "version": "1.0",
+  "meta": {
+    "title": "Disneyland Rides",
+    "description": "Attractions at Disneyland Resort in Anaheim.",
+    "icon": "🏰",
+    "defaultAnimation": "slot",
+    "tags": ["disney", "rides", "disneyland", "anaheim", "attractions", "thrill"],
+    "hierarchy": { "level1": "Disney", "level2": "Disneyland", "level3": "Rides" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "park": { "label": "Park", "multiSelect": true },
+    "thrillLevel": { "label": "Thrill Level", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "park": ["Disneyland Park", "Disney California Adventure"],
+    "thrillLevel": ["Low", "Moderate", "High"]
+  },
+  "items": [
+    { "value": "Space Mountain", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Matterhorn Bobsleds", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Big Thunder Mountain", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Haunted Mansion", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Pirates of the Caribbean", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Indiana Jones Adventure", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Star Wars: Rise of the Resistance", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Millennium Falcon: Smugglers Run", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Finding Nemo Submarine Voyage", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Guardians of the Galaxy – Mission: BREAKOUT!", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["High"] } },
+    { "value": "Radiator Springs Racers", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Moderate"] } },
+    { "value": "Incredicoaster", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["High"] } },
+    { "value": "Web Slingers", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } },
+    { "value": "Toy Story Midway Mania!", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } },
+    { "value": "Soarin' Around the World", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } }
+  ],
+  "sampling": { "replacement": true }
+}

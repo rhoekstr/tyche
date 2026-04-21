@@ -1,0 +1,24 @@
+{
+  "id": "adjectives",
+  "version": "1.0",
+  "meta": {
+    "title": "Adjectives",
+    "description": "Random adjectives for creative prompts and constraints.",
+    "icon": "✍️",
+    "defaultAnimation": "slot",
+    "tags": ["creative", "adjectives", "writing", "prompts", "words"],
+    "hierarchy": { "level1": "Creative", "level2": "Words", "level3": "Adjectives" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Haunted" }, { "value": "Electric" }, { "value": "Tiny" }, { "value": "Ancient" },
+    { "value": "Invisible" }, { "value": "Neon" }, { "value": "Crumbling" }, { "value": "Enormous" },
+    { "value": "Whispering" }, { "value": "Blazing" }, { "value": "Forgotten" }, { "value": "Luminous" },
+    { "value": "Hollow" }, { "value": "Frenzied" }, { "value": "Velvet" }, { "value": "Ominous" },
+    { "value": "Sparkling" }, { "value": "Crooked" }, { "value": "Floating" }, { "value": "Petrified" },
+    { "value": "Shimmering" }, { "value": "Rusted" }, { "value": "Enchanted" }, { "value": "Desolate" },
+    { "value": "Glowing" }, { "value": "Melting" }, { "value": "Furious" }, { "value": "Serene" },
+    { "value": "Jagged" }, { "value": "Mossy" }, { "value": "Toxic" }, { "value": "Crystalline" }
+  ],
+  "sampling": { "replacement": true }
+}

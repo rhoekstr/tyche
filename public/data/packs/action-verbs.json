@@ -1,0 +1,22 @@
+{
+  "id": "action-verbs",
+  "version": "1.0",
+  "meta": {
+    "title": "Action Verbs",
+    "description": "Random action verbs for prompts and constraints.",
+    "icon": "⚡",
+    "defaultAnimation": "slot",
+    "tags": ["creative", "verbs", "action", "writing", "prompts", "words"],
+    "hierarchy": { "level1": "Creative", "level2": "Words", "level3": "Action Verbs" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Shatter" }, { "value": "Unearth" }, { "value": "Weave" }, { "value": "Ignite" },
+    { "value": "Vanish" }, { "value": "Summon" }, { "value": "Devour" }, { "value": "Ascend" },
+    { "value": "Betray" }, { "value": "Discover" }, { "value": "Collapse" }, { "value": "Transform" },
+    { "value": "Drift" }, { "value": "Haunt" }, { "value": "Forge" }, { "value": "Flee" },
+    { "value": "Construct" }, { "value": "Whisper" }, { "value": "Conquer" }, { "value": "Dissolve" },
+    { "value": "Illuminate" }, { "value": "Pursue" }, { "value": "Rebuild" }, { "value": "Sacrifice" }
+  ],
+  "sampling": { "replacement": true }
+}

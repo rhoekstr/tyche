@@ -1,0 +1,21 @@
+{
+  "id": "weekend-trips",
+  "version": "1.0",
+  "meta": {
+    "title": "Weekend Trip Types",
+    "description": "What kind of getaway should you take?",
+    "icon": "🧳",
+    "defaultAnimation": "slot",
+    "tags": ["travel", "weekend", "trips", "vacation", "getaway"],
+    "hierarchy": { "level1": "Travel", "level2": "Weekend Trips" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Mountain Cabin" }, { "value": "Beach Weekend" }, { "value": "City Break" },
+    { "value": "Road Trip" }, { "value": "Camping" }, { "value": "National Park Hike" },
+    { "value": "Wine Country" }, { "value": "Hot Springs" }, { "value": "Ski Trip" },
+    { "value": "Island Getaway" }, { "value": "Spa Retreat" }, { "value": "Music Festival" },
+    { "value": "Historical Town" }, { "value": "Waterfall Chase" }, { "value": "Food Tour" }
+  ],
+  "sampling": { "replacement": true }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "board-games",
+  "version": "1.0",
+  "meta": {
+    "title": "Board Games",
+    "description": "Spin for tonight's game night pick.",
+    "icon": "🎲",
+    "defaultAnimation": "dice",
+    "tags": ["games", "board games", "tabletop", "party", "strategy"],
+    "hierarchy": { "level1": "Games", "level2": "Board Games" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "players": { "label": "Player Count", "multiSelect": true },
+    "complexity": { "label": "Complexity", "multiSelect": true },
+    "playTime": { "label": "Play Time", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "players": ["2", "3", "4", "5", "6+"],
+    "complexity": ["Light", "Medium", "Heavy"],
+    "playTime": ["<30 min", "30–60 min", "1–2 hrs", "2+ hrs"]
+  },
+  "items": [
+    { "value": "Catan", "filters": { "players": ["3","4"], "complexity": ["Medium"], "playTime": ["1–2 hrs"] } },
+    { "value": "Ticket to Ride", "filters": { "players": ["2","3","4","5"], "complexity": ["Light"], "playTime": ["30–60 min"] } },
+    { "value": "Codenames", "filters": { "players": ["4","5","6+"], "complexity": ["Light"], "playTime": ["<30 min"] } },
+    { "value": "Pandemic", "filters": { "players": ["2","3","4"], "complexity": ["Medium"], "playTime": ["30–60 min"] } },
+    { "value": "Azul", "filters": { "players": ["2","3","4"], "complexity": ["Light"], "playTime": ["30–60 min"] } },
+    { "value": "Wingspan", "filters": { "players": ["2","3","4","5"], "complexity": ["Medium"], "playTime": ["1–2 hrs"] } },
+    { "value": "7 Wonders", "filters": { "players": ["2","3","4","5","6+"], "complexity": ["Medium"], "playTime": ["30–60 min"] } },
+    { "value": "Gloomhaven", "filters": { "players": ["2","3","4"], "complexity": ["Heavy"], "playTime": ["2+ hrs"] } },
+    { "value": "Terraforming Mars", "filters": { "players": ["2","3","4","5"], "complexity": ["Heavy"], "playTime": ["2+ hrs"] } },
+    { "value": "Splendor", "filters": { "players": ["2","3","4"], "complexity": ["Light"], "playTime": ["30–60 min"] } },
+    { "value": "Dixit", "filters": { "players": ["3","4","5","6+"], "complexity": ["Light"], "playTime": ["30–60 min"] } },
+    { "value": "Betrayal at House on the Hill", "filters": { "players": ["3","4","5","6+"], "complexity": ["Medium"], "playTime": ["1–2 hrs"] } },
+    { "value": "Scythe", "filters": { "players": ["2","3","4","5"], "complexity": ["Heavy"], "playTime": ["2+ hrs"] } },
+    { "value": "Root", "filters": { "players": ["2","3","4"], "complexity": ["Heavy"], "playTime": ["1–2 hrs"] } },
+    { "value": "Dominion", "filters": { "players": ["2","3","4"], "complexity": ["Medium"], "playTime": ["30–60 min"] } },
+    { "value": "Carcassonne", "filters": { "players": ["2","3","4","5"], "complexity": ["Light"], "playTime": ["30–60 min"] } },
+    { "value": "Sushi Go!", "filters": { "players": ["2","3","4","5"], "complexity": ["Light"], "playTime": ["<30 min"] } },
+    { "value": "Forbidden Island", "filters": { "players": ["2","3","4"], "complexity": ["Light"], "playTime": ["<30 min"] } },
+    { "value": "Exploding Kittens", "filters": { "players": ["2","3","4","5"], "complexity": ["Light"], "playTime": ["<30 min"] } },
+    { "value": "Mysterium", "filters": { "players": ["2","3","4","5","6+"], "complexity": ["Medium"], "playTime": ["1–2 hrs"] } }
+  ],
+  "sampling": { "replacement": true }
+}

@@ -1,0 +1,383 @@
+{
+  "version": "1.0",
+  "packs": [
+    {
+      "id": "world-cuisines",
+      "path": "data/packs/world-cuisines.json",
+      "meta": {
+        "title": "World Cuisines",
+        "description": "Pick a cuisine from around the world.",
+        "icon": "🌍",
+        "defaultAnimation": "slot",
+        "tags": ["food", "cuisine", "dining", "world", "restaurants"],
+        "hierarchy": { "level1": "Food & Drink", "level2": "Cuisines" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "dish-types",
+      "path": "data/packs/dish-types.json",
+      "meta": {
+        "title": "Dish Types",
+        "description": "What style of meal are you in the mood for?",
+        "icon": "🍽️",
+        "defaultAnimation": "slot",
+        "tags": ["food", "meal", "dish", "cooking", "dining"],
+        "hierarchy": { "level1": "Food & Drink", "level2": "Dish Types" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "dining-mode",
+      "path": "data/packs/dining-mode.json",
+      "meta": {
+        "title": "Dining Mode",
+        "description": "How are you eating tonight?",
+        "icon": "🛵",
+        "defaultAnimation": "coin",
+        "tags": ["food", "delivery", "dining", "takeout", "restaurant"],
+        "hierarchy": { "level1": "Food & Drink", "level2": "Dining Mode" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "breakfast-options",
+      "path": "data/packs/breakfast-options.json",
+      "meta": {
+        "title": "Breakfast Options",
+        "description": "What's for breakfast? Let fate decide.",
+        "icon": "🍳",
+        "defaultAnimation": "slot",
+        "tags": ["food", "breakfast", "brunch", "morning", "meals"],
+        "hierarchy": { "level1": "Food & Drink", "level2": "Breakfast" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "cocktails",
+      "path": "data/packs/cocktails.json",
+      "meta": {
+        "title": "Cocktails & Mocktails",
+        "description": "Spin for your next drink order.",
+        "icon": "🍹",
+        "defaultAnimation": "slot",
+        "tags": ["drinks", "cocktails", "mocktails", "bar", "beverages"],
+        "hierarchy": { "level1": "Food & Drink", "level2": "Cocktails & Mocktails" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "wdw-dining",
+      "path": "data/packs/wdw-dining.json",
+      "meta": {
+        "title": "Walt Disney World Dining",
+        "description": "Restaurants across all WDW parks.",
+        "icon": "🍽️",
+        "defaultAnimation": "slot",
+        "tags": ["disney", "dining", "wdw", "restaurants", "food", "orlando"],
+        "hierarchy": { "level1": "Disney", "level2": "Walt Disney World", "level3": "Dining" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "wdw-rides",
+      "path": "data/packs/wdw-rides.json",
+      "meta": {
+        "title": "Walt Disney World Rides",
+        "description": "Attractions across all WDW parks.",
+        "icon": "🎢",
+        "defaultAnimation": "slot",
+        "tags": ["disney", "rides", "wdw", "attractions", "orlando", "thrill"],
+        "hierarchy": { "level1": "Disney", "level2": "Walt Disney World", "level3": "Rides" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "wdw-activities",
+      "path": "data/packs/wdw-activities.json",
+      "meta": {
+        "title": "Walt Disney World Activities",
+        "description": "Shows, experiences & extras beyond the rides.",
+        "icon": "🌟",
+        "defaultAnimation": "slot",
+        "tags": ["disney", "wdw", "activities", "shows", "orlando", "entertainment"],
+        "hierarchy": { "level1": "Disney", "level2": "Walt Disney World", "level3": "Activities" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "disneyland-rides",
+      "path": "data/packs/disneyland-rides.json",
+      "meta": {
+        "title": "Disneyland Rides",
+        "description": "Attractions at Disneyland Resort in Anaheim.",
+        "icon": "🏰",
+        "defaultAnimation": "slot",
+        "tags": ["disney", "rides", "disneyland", "anaheim", "attractions", "thrill"],
+        "hierarchy": { "level1": "Disney", "level2": "Disneyland", "level3": "Rides" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "disneyland-dining",
+      "path": "data/packs/disneyland-dining.json",
+      "meta": {
+        "title": "Disneyland Dining",
+        "description": "Restaurants & eateries at Disneyland Resort.",
+        "icon": "🍽️",
+        "defaultAnimation": "slot",
+        "tags": ["disney", "dining", "disneyland", "anaheim", "food", "restaurants"],
+        "hierarchy": { "level1": "Disney", "level2": "Disneyland", "level3": "Dining" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "dlp-rides",
+      "path": "data/packs/dlp-rides.json",
+      "meta": {
+        "title": "Disneyland Paris Rides",
+        "description": "Attractions at Disneyland Paris.",
+        "icon": "🗼",
+        "defaultAnimation": "slot",
+        "tags": ["disney", "rides", "disneyland paris", "france", "europe", "attractions", "thrill"],
+        "hierarchy": { "level1": "Disney", "level2": "Disneyland Paris", "level3": "Rides" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "board-games",
+      "path": "data/packs/board-games.json",
+      "meta": {
+        "title": "Board Games",
+        "description": "Spin for tonight's game night pick.",
+        "icon": "🎲",
+        "defaultAnimation": "dice",
+        "tags": ["games", "board games", "tabletop", "party", "strategy"],
+        "hierarchy": { "level1": "Games", "level2": "Board Games" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "card-games",
+      "path": "data/packs/card-games.json",
+      "meta": {
+        "title": "Card Games",
+        "description": "Spin for what card game to play tonight.",
+        "icon": "🃏",
+        "defaultAnimation": "card",
+        "tags": ["games", "cards", "card games", "tabletop", "party"],
+        "hierarchy": { "level1": "Games", "level2": "Card Games" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "party-games",
+      "path": "data/packs/party-games.json",
+      "meta": {
+        "title": "Party Games",
+        "description": "Pick a party game everyone can play.",
+        "icon": "🎉",
+        "defaultAnimation": "slot",
+        "tags": ["games", "party", "group", "fun", "social"],
+        "hierarchy": { "level1": "Games", "level2": "Party Games" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "workouts",
+      "path": "data/packs/workouts.json",
+      "meta": {
+        "title": "Workouts",
+        "description": "Spin for today's workout.",
+        "icon": "💪",
+        "defaultAnimation": "dice",
+        "tags": ["fitness", "workouts", "exercise", "gym", "health"],
+        "hierarchy": { "level1": "Fitness", "level2": "Workouts" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "yoga-poses",
+      "path": "data/packs/yoga-poses.json",
+      "meta": {
+        "title": "Yoga Poses",
+        "description": "Spin for your next pose.",
+        "icon": "🧘",
+        "defaultAnimation": "card",
+        "tags": ["fitness", "yoga", "poses", "stretching", "mindfulness", "wellness"],
+        "hierarchy": { "level1": "Fitness", "level2": "Yoga Poses" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "stretches",
+      "path": "data/packs/stretches.json",
+      "meta": {
+        "title": "Stretches",
+        "description": "Spin for a stretch — great for desk breaks.",
+        "icon": "🤸",
+        "defaultAnimation": "card",
+        "tags": ["fitness", "stretching", "flexibility", "wellness", "desk", "recovery"],
+        "hierarchy": { "level1": "Fitness", "level2": "Stretches" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "adjectives",
+      "path": "data/packs/adjectives.json",
+      "meta": {
+        "title": "Adjectives",
+        "description": "Random adjectives for creative prompts and constraints.",
+        "icon": "✍️",
+        "defaultAnimation": "slot",
+        "tags": ["creative", "adjectives", "writing", "prompts", "words"],
+        "hierarchy": { "level1": "Creative", "level2": "Words", "level3": "Adjectives" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "nouns",
+      "path": "data/packs/nouns.json",
+      "meta": {
+        "title": "Nouns",
+        "description": "Random nouns for creative prompts.",
+        "icon": "📦",
+        "defaultAnimation": "slot",
+        "tags": ["creative", "nouns", "writing", "prompts", "words"],
+        "hierarchy": { "level1": "Creative", "level2": "Words", "level3": "Nouns" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "action-verbs",
+      "path": "data/packs/action-verbs.json",
+      "meta": {
+        "title": "Action Verbs",
+        "description": "Random action verbs for prompts and constraints.",
+        "icon": "⚡",
+        "defaultAnimation": "slot",
+        "tags": ["creative", "verbs", "action", "writing", "prompts", "words"],
+        "hierarchy": { "level1": "Creative", "level2": "Words", "level3": "Action Verbs" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "themes-scenarios",
+      "path": "data/packs/themes-scenarios.json",
+      "meta": {
+        "title": "Random Themes & Scenarios",
+        "description": "Spin for a creative challenge scenario.",
+        "icon": "🎭",
+        "defaultAnimation": "card",
+        "tags": ["creative", "themes", "scenarios", "prompts", "challenges", "writing"],
+        "hierarchy": { "level1": "Creative", "level2": "Themes & Scenarios" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "us-national-parks",
+      "path": "data/packs/us-national-parks.json",
+      "meta": {
+        "title": "US National Parks",
+        "description": "Where to next? Spin for a national park.",
+        "icon": "🏔️",
+        "defaultAnimation": "slot",
+        "tags": ["travel", "national parks", "outdoors", "hiking", "usa", "nature"],
+        "hierarchy": { "level1": "Travel", "level2": "US National Parks" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "world-cities",
+      "path": "data/packs/world-cities.json",
+      "meta": {
+        "title": "World Cities",
+        "description": "Spin for your next dream destination.",
+        "icon": "✈️",
+        "defaultAnimation": "slot",
+        "tags": ["travel", "cities", "world", "destinations", "vacation", "adventure"],
+        "hierarchy": { "level1": "Travel", "level2": "World Cities" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "weekend-trips",
+      "path": "data/packs/weekend-trips.json",
+      "meta": {
+        "title": "Weekend Trip Types",
+        "description": "What kind of getaway should you take?",
+        "icon": "🧳",
+        "defaultAnimation": "slot",
+        "tags": ["travel", "weekend", "trips", "vacation", "getaway"],
+        "hierarchy": { "level1": "Travel", "level2": "Weekend Trips" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "summer-activities",
+      "path": "data/packs/summer-activities.json",
+      "meta": {
+        "title": "Summer Activities",
+        "description": "Beat boredom with a random summer activity.",
+        "icon": "☀️",
+        "defaultAnimation": "slot",
+        "tags": ["kids", "summer", "activities", "outdoor", "fun"],
+        "hierarchy": { "level1": "Kids", "level2": "Summer Activities" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "rainy-day-activities",
+      "path": "data/packs/rainy-day-activities.json",
+      "meta": {
+        "title": "Rainy Day Activities",
+        "description": "Stuck inside? Spin for something fun.",
+        "icon": "🌧️",
+        "defaultAnimation": "slot",
+        "tags": ["kids", "rainy day", "indoor", "activities", "fun"],
+        "hierarchy": { "level1": "Kids", "level2": "Rainy Day Activities" },
+        "source": "official",
+        "submittedBy": null
+      }
+    },
+    {
+      "id": "snack-ideas",
+      "path": "data/packs/snack-ideas.json",
+      "meta": {
+        "title": "Snack Ideas",
+        "description": "Can't decide what to snack on? Spin it.",
+        "icon": "🍿",
+        "defaultAnimation": "slot",
+        "tags": ["kids", "snacks", "food", "treats", "quick"],
+        "hierarchy": { "level1": "Kids", "level2": "Snack Ideas" },
+        "source": "official",
+        "submittedBy": null
+      }
+    }
+  ]
+}

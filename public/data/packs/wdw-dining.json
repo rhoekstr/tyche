@@ -1,0 +1,45 @@
+{
+  "id": "wdw-dining",
+  "version": "1.0",
+  "meta": {
+    "title": "Walt Disney World Dining",
+    "description": "Restaurants across all WDW parks and resorts.",
+    "icon": "🍽️",
+    "defaultAnimation": "slot",
+    "tags": ["disney", "dining", "wdw", "restaurants", "food", "orlando"],
+    "hierarchy": { "level1": "Disney", "level2": "Walt Disney World", "level3": "Dining" },
+    "source": "official",
+    "submittedBy": null
+  },
+  "filters": {
+    "park": { "label": "Park", "multiSelect": true },
+    "serviceType": { "label": "Service Type", "multiSelect": true },
+    "characterDining": { "label": "Character Dining", "multiSelect": false }
+  },
+  "defaultFilters": {
+    "park": ["Magic Kingdom", "EPCOT", "Hollywood Studios", "Animal Kingdom"],
+    "serviceType": ["Table Service", "Quick Service"],
+    "characterDining": ["No", "Yes"]
+  },
+  "items": [
+    { "value": "Be Our Guest Restaurant", "filters": { "park": ["Magic Kingdom"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Cinderella's Royal Table", "filters": { "park": ["Magic Kingdom"], "serviceType": ["Table Service"], "characterDining": ["Yes"] } },
+    { "value": "Crystal Palace", "filters": { "park": ["Magic Kingdom"], "serviceType": ["Table Service"], "characterDining": ["Yes"] } },
+    { "value": "Cosmic Ray's Starlight Café", "filters": { "park": ["Magic Kingdom"], "serviceType": ["Quick Service"], "characterDining": ["No"] } },
+    { "value": "Pecos Bill Tall Tale Inn", "filters": { "park": ["Magic Kingdom"], "serviceType": ["Quick Service"], "characterDining": ["No"] } },
+    { "value": "Space 220 Restaurant", "filters": { "park": ["EPCOT"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Garden Grill", "filters": { "park": ["EPCOT"], "serviceType": ["Table Service"], "characterDining": ["Yes"] } },
+    { "value": "Le Cellier Steakhouse", "filters": { "park": ["EPCOT"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Sunshine Seasons", "filters": { "park": ["EPCOT"], "serviceType": ["Quick Service"], "characterDining": ["No"] } },
+    { "value": "Regal Eagle Smokehouse", "filters": { "park": ["EPCOT"], "serviceType": ["Quick Service"], "characterDining": ["No"] } },
+    { "value": "50's Prime Time Café", "filters": { "park": ["Hollywood Studios"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Hollywood Brown Derby", "filters": { "park": ["Hollywood Studios"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Sci-Fi Dine-In Theater", "filters": { "park": ["Hollywood Studios"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Docking Bay 7", "filters": { "park": ["Hollywood Studios"], "serviceType": ["Quick Service"], "characterDining": ["No"] } },
+    { "value": "Tusker House", "filters": { "park": ["Animal Kingdom"], "serviceType": ["Table Service"], "characterDining": ["Yes"] } },
+    { "value": "Yak & Yeti Restaurant", "filters": { "park": ["Animal Kingdom"], "serviceType": ["Table Service"], "characterDining": ["No"] } },
+    { "value": "Satu'li Canteen", "filters": { "park": ["Animal Kingdom"], "serviceType": ["Quick Service"], "characterDining": ["No"] } },
+    { "value": "Flame Tree Barbecue", "filters": { "park": ["Animal Kingdom"], "serviceType": ["Quick Service"], "characterDining": ["No"] } }
+  ],
+  "sampling": { "replacement": true }
+}

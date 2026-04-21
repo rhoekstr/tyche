@@ -1,0 +1,26 @@
+{
+  "id": "themes-scenarios",
+  "version": "1.0",
+  "meta": {
+    "title": "Random Themes & Scenarios",
+    "description": "Spin for a creative challenge scenario.",
+    "icon": "🎭",
+    "defaultAnimation": "card",
+    "tags": ["creative", "themes", "scenarios", "prompts", "challenges", "writing"],
+    "hierarchy": { "level1": "Creative", "level2": "Themes & Scenarios" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "A heist gone wrong" }, { "value": "Two strangers on a train" },
+    { "value": "The last library on Earth" }, { "value": "A city built on water" },
+    { "value": "Time travel to fix one mistake" }, { "value": "An AI falls in love" },
+    { "value": "The final expedition" }, { "value": "A map to nowhere" },
+    { "value": "Something ordinary becomes extraordinary" }, { "value": "The letter never sent" },
+    { "value": "A world where dreams are recorded" }, { "value": "The last human on the moon" },
+    { "value": "A secret society of gardeners" }, { "value": "Everyone can read minds except one" },
+    { "value": "A revolution begins in a kitchen" }, { "value": "The storm that never ended" },
+    { "value": "A conversation between enemies" }, { "value": "The day gravity reversed" },
+    { "value": "A machine that grants one wish" }, { "value": "The city that forgot its name" }
+  ],
+  "sampling": { "replacement": true }
+}

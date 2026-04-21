@@ -1,0 +1,18 @@
+{
+  "id": "dining-mode",
+  "version": "1.0",
+  "meta": {
+    "title": "Dining Mode",
+    "description": "How are you eating tonight?",
+    "icon": "🛵",
+    "defaultAnimation": "coin",
+    "tags": ["food", "delivery", "dining", "takeout", "restaurant"],
+    "hierarchy": { "level1": "Food & Drink", "level2": "Dining Mode" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Eat In" }, { "value": "Takeout" }, { "value": "Delivery" }, { "value": "Drive-Through" },
+    { "value": "Cook at Home" }, { "value": "Meal Kit" }, { "value": "Picnic" }, { "value": "Food Truck" }
+  ],
+  "sampling": { "replacement": true }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "party-games",
+  "version": "1.0",
+  "meta": {
+    "title": "Party Games",
+    "description": "Pick a party game everyone can play.",
+    "icon": "🎉",
+    "defaultAnimation": "slot",
+    "tags": ["games", "party", "group", "fun", "social"],
+    "hierarchy": { "level1": "Games", "level2": "Party Games" },
+    "source": "official", "submittedBy": null
+  },
+  "items": [
+    { "value": "Jackbox Party Pack" }, { "value": "Werewolf / Mafia" }, { "value": "Charades" },
+    { "value": "Pictionary" }, { "value": "Trivia" }, { "value": "Never Have I Ever" },
+    { "value": "Two Truths and a Lie" }, { "value": "Bingo" }, { "value": "Karaoke" },
+    { "value": "Heads Up!" }, { "value": "Telestrations" }, { "value": "What Do You Meme?" },
+    { "value": "Fibbage" }, { "value": "Quiplash" }, { "value": "The Resistance" },
+    { "value": "Uno" }, { "value": "Spyfall" }, { "value": "Wits & Wagers" }
+  ],
+  "sampling": { "replacement": true }
+}

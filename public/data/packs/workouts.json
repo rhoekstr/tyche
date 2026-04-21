@@ -1,0 +1,40 @@
+{
+  "id": "workouts",
+  "version": "1.0",
+  "meta": {
+    "title": "Workouts",
+    "description": "Spin for today's workout.",
+    "icon": "💪",
+    "defaultAnimation": "dice",
+    "tags": ["fitness", "workouts", "exercise", "gym", "health"],
+    "hierarchy": { "level1": "Fitness", "level2": "Workouts" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "equipment": { "label": "Equipment", "multiSelect": true },
+    "duration": { "label": "Duration", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "equipment": ["Bodyweight", "Dumbbells", "Kettlebell", "Resistance Bands", "Barbell"],
+    "duration": ["5 min", "10 min", "20 min", "30 min+"]
+  },
+  "items": [
+    { "value": "HIIT Circuit", "filters": { "equipment": ["Bodyweight"], "duration": ["20 min"] } },
+    { "value": "Push-up Ladder", "filters": { "equipment": ["Bodyweight"], "duration": ["10 min"] } },
+    { "value": "Core Crusher", "filters": { "equipment": ["Bodyweight"], "duration": ["10 min"] } },
+    { "value": "Jump Rope Intervals", "filters": { "equipment": ["Bodyweight"], "duration": ["10 min"] } },
+    { "value": "Tabata Sprints", "filters": { "equipment": ["Bodyweight"], "duration": ["5 min"] } },
+    { "value": "Burpee Challenge", "filters": { "equipment": ["Bodyweight"], "duration": ["5 min"] } },
+    { "value": "Dumbbell Full Body", "filters": { "equipment": ["Dumbbells"], "duration": ["30 min+"] } },
+    { "value": "Dumbbell Superset Arms", "filters": { "equipment": ["Dumbbells"], "duration": ["20 min"] } },
+    { "value": "Goblet Squat Circuit", "filters": { "equipment": ["Kettlebell", "Dumbbells"], "duration": ["20 min"] } },
+    { "value": "Kettlebell Swings", "filters": { "equipment": ["Kettlebell"], "duration": ["10 min"] } },
+    { "value": "Kettlebell Complex", "filters": { "equipment": ["Kettlebell"], "duration": ["20 min"] } },
+    { "value": "Band Pull-aparts", "filters": { "equipment": ["Resistance Bands"], "duration": ["5 min"] } },
+    { "value": "Resistance Band Lower Body", "filters": { "equipment": ["Resistance Bands"], "duration": ["20 min"] } },
+    { "value": "Deadlift Session", "filters": { "equipment": ["Barbell"], "duration": ["30 min+"] } },
+    { "value": "Barbell Squat & Press", "filters": { "equipment": ["Barbell"], "duration": ["30 min+"] } },
+    { "value": "5x5 Strength Day", "filters": { "equipment": ["Barbell", "Dumbbells"], "duration": ["30 min+"] } }
+  ],
+  "sampling": { "replacement": false, "showRemaining": true, "exhaustedBehavior": "reshuffle" }
+}

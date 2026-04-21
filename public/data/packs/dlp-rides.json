@@ -1,0 +1,43 @@
+{
+  "id": "dlp-rides",
+  "version": "1.0",
+  "meta": {
+    "title": "Disneyland Paris Rides",
+    "description": "Attractions at Disneyland Paris.",
+    "icon": "🗼",
+    "defaultAnimation": "slot",
+    "tags": ["disney", "rides", "disneyland paris", "france", "europe", "attractions", "thrill"],
+    "hierarchy": { "level1": "Disney", "level2": "Disneyland Paris", "level3": "Rides" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "park": { "label": "Park", "multiSelect": true },
+    "thrillLevel": { "label": "Thrill Level", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "park": ["Disneyland Park", "Walt Disney Studios Park"],
+    "thrillLevel": ["Low", "Moderate", "High"]
+  },
+  "items": [
+    { "value": "Big Thunder Mountain", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Space Mountain: Mission 2", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Indiana Jones and the Temple of Peril", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Phantom Manor", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Pirates of the Caribbean", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Peter Pan's Flight", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Alice's Curious Labyrinth", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Buzz Lightyear Laser Blast", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Star Tours: The Adventures Continue", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Hyperspace Mountain", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Orbitron", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Crush's Coaster", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["High"] } },
+    { "value": "RC Racer", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Ratatouille: The Adventure", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["Low"] } },
+    { "value": "The Twilight Zone Tower of Terror", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["High"] } },
+    { "value": "Toy Soldiers Parachute Drop", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Avengers Assemble: Flight Force", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["High"] } },
+    { "value": "Cars Road Trip", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["Low"] } },
+    { "value": "Spider-Man W.E.B. Adventure", "filters": { "park": ["Walt Disney Studios Park"], "thrillLevel": ["Low"] } }
+  ],
+  "sampling": { "replacement": true }
+}

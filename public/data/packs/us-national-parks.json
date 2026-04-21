@@ -1,0 +1,45 @@
+{
+  "id": "us-national-parks",
+  "version": "1.0",
+  "meta": {
+    "title": "US National Parks",
+    "description": "Where to next? Spin for a national park.",
+    "icon": "🏔️",
+    "defaultAnimation": "slot",
+    "tags": ["travel", "national parks", "outdoors", "hiking", "usa", "nature"],
+    "hierarchy": { "level1": "Travel", "level2": "US National Parks" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "region": { "label": "Region", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "region": ["West", "Southwest", "Midwest", "South", "Northeast", "Alaska & Pacific"]
+  },
+  "items": [
+    { "value": "Yellowstone", "filters": { "region": ["West"] } },
+    { "value": "Grand Teton", "filters": { "region": ["West"] } },
+    { "value": "Glacier", "filters": { "region": ["West"] } },
+    { "value": "Olympic", "filters": { "region": ["West"] } },
+    { "value": "Redwood", "filters": { "region": ["West"] } },
+    { "value": "Yosemite", "filters": { "region": ["West"] } },
+    { "value": "Sequoia", "filters": { "region": ["West"] } },
+    { "value": "Joshua Tree", "filters": { "region": ["Southwest"] } },
+    { "value": "Grand Canyon", "filters": { "region": ["Southwest"] } },
+    { "value": "Zion", "filters": { "region": ["Southwest"] } },
+    { "value": "Bryce Canyon", "filters": { "region": ["Southwest"] } },
+    { "value": "Arches", "filters": { "region": ["Southwest"] } },
+    { "value": "Canyonlands", "filters": { "region": ["Southwest"] } },
+    { "value": "Mesa Verde", "filters": { "region": ["Southwest"] } },
+    { "value": "Great Smoky Mountains", "filters": { "region": ["South"] } },
+    { "value": "Everglades", "filters": { "region": ["South"] } },
+    { "value": "Shenandoah", "filters": { "region": ["South"] } },
+    { "value": "Acadia", "filters": { "region": ["Northeast"] } },
+    { "value": "Rocky Mountain", "filters": { "region": ["West"] } },
+    { "value": "Denali", "filters": { "region": ["Alaska & Pacific"] } },
+    { "value": "Haleakalā", "filters": { "region": ["Alaska & Pacific"] } },
+    { "value": "Wind Cave", "filters": { "region": ["Midwest"] } },
+    { "value": "Badlands", "filters": { "region": ["Midwest"] } }
+  ],
+  "sampling": { "replacement": true }
+}

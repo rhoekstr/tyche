@@ -1,0 +1,49 @@
+{
+  "id": "wdw-activities",
+  "version": "1.0",
+  "meta": {
+    "title": "Walt Disney World Activities",
+    "description": "Shows, experiences & extras beyond the rides.",
+    "icon": "🌟",
+    "defaultAnimation": "slot",
+    "tags": ["disney", "wdw", "activities", "shows", "orlando", "entertainment"],
+    "hierarchy": { "level1": "Disney", "level2": "Walt Disney World", "level3": "Activities" },
+    "source": "official", "submittedBy": null
+  },
+  "filters": {
+    "park": { "label": "Park", "multiSelect": true },
+    "type": { "label": "Type", "multiSelect": true }
+  },
+  "defaultFilters": {
+    "park": ["Magic Kingdom", "EPCOT", "Hollywood Studios", "Animal Kingdom", "Disney Springs", "Resort"],
+    "type": ["Show", "Character Meet", "Experience", "Dining", "Shopping", "Night Event"]
+  },
+  "items": [
+    { "value": "Festival of the Lion King", "filters": { "park": ["Animal Kingdom"], "type": ["Show"] } },
+    { "value": "Finding Nemo: The Big Blue... and Beyond!", "filters": { "park": ["Animal Kingdom"], "type": ["Show"] } },
+    { "value": "Rivers of Light (when running)", "filters": { "park": ["Animal Kingdom"], "type": ["Night Event"] } },
+    { "value": "Mickey & Minnie at Town Square Theater", "filters": { "park": ["Magic Kingdom"], "type": ["Character Meet"] } },
+    { "value": "Happily Ever After fireworks", "filters": { "park": ["Magic Kingdom"], "type": ["Night Event"] } },
+    { "value": "Mickey's PhilharMagic", "filters": { "park": ["Magic Kingdom"], "type": ["Show"] } },
+    { "value": "Hall of Presidents", "filters": { "park": ["Magic Kingdom"], "type": ["Show"] } },
+    { "value": "Carousel of Progress", "filters": { "park": ["Magic Kingdom"], "type": ["Show"] } },
+    { "value": "EPCOT International Food & Wine Festival", "filters": { "park": ["EPCOT"], "type": ["Experience"] } },
+    { "value": "Disney & Pixar Short Film Festival", "filters": { "park": ["EPCOT"], "type": ["Show"] } },
+    { "value": "Harmonious / EPCOT Forever", "filters": { "park": ["EPCOT"], "type": ["Night Event"] } },
+    { "value": "Luminara (World Showcase stroll)", "filters": { "park": ["EPCOT"], "type": ["Experience"] } },
+    { "value": "Frozen Sing-Along", "filters": { "park": ["Hollywood Studios"], "type": ["Show"] } },
+    { "value": "Indiana Jones Epic Stunt Spectacular", "filters": { "park": ["Hollywood Studios"], "type": ["Show"] } },
+    { "value": "Star Wars: A Galaxy Far, Far Away", "filters": { "park": ["Hollywood Studios"], "type": ["Show"] } },
+    { "value": "Fantasmic!", "filters": { "park": ["Hollywood Studios"], "type": ["Night Event"] } },
+    { "value": "World of Color – One", "filters": { "park": ["Hollywood Studios"], "type": ["Night Event"] } },
+    { "value": "Bibbidi Bobbidi Boutique", "filters": { "park": ["Magic Kingdom"], "type": ["Experience"] } },
+    { "value": "Build a Lightsaber at Savi's Workshop", "filters": { "park": ["Hollywood Studios"], "type": ["Experience"] } },
+    { "value": "Build a Droid at Droid Depot", "filters": { "park": ["Hollywood Studios"], "type": ["Experience"] } },
+    { "value": "The VOID (Disney Springs)", "filters": { "park": ["Disney Springs"], "type": ["Experience"] } },
+    { "value": "World of Disney store", "filters": { "park": ["Disney Springs"], "type": ["Shopping"] } },
+    { "value": "Victoria & Albert's (Grand Floridian)", "filters": { "park": ["Resort"], "type": ["Dining"] } },
+    { "value": "Mickey's Not-So-Scary Halloween Party", "filters": { "park": ["Magic Kingdom"], "type": ["Night Event"] } },
+    { "value": "Mickey's Very Merry Christmas Party", "filters": { "park": ["Magic Kingdom"], "type": ["Night Event"] } }
+  ],
+  "sampling": { "replacement": true }
+}
