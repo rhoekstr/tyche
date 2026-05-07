@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { PackItem } from '@/types/pack'
+import { shuffle } from '@/utils/randomize'
 
 interface Props {
   pool: PackItem[]
@@ -13,9 +14,26 @@ interface Props {
 const SIZE = 168
 const FACE_W = SIZE
 const FACE_H = SIZE * 1.15
-const APOTHEM = (FACE_W / 2) / Math.tan(Math.PI / 3) // distance from center to face for triangular prism (60°)
-const TOTAL_ROTATION = 1440 // 4 full Y rotations + landing offset
+const APOTHEM = (FACE_W / 2) / Math.tan(Math.PI / 3)
+const TOTAL_ROTATION = 1440
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
+
+type FaceTriple = [PackItem | null, PackItem | null, PackItem | null]
+
+function pickInitialFaces(pool: PackItem[], result: PackItem, resultSlot: number): FaceTriple {
+  const others = shuffle(pool.filter((p) => p.value !== result.value))
+  const faces: (PackItem | null)[] = [null, null, null]
+  // Hide result from the user at the start by putting some other item on the
+  // result slot. (Falls back to result itself if pool is too small.)
+  faces[resultSlot] = others[0] ?? result
+  let oi = 1
+  for (let i = 0; i < 3; i++) {
+    if (i === resultSlot) continue
+    faces[i] = others[oi] ?? result
+    oi++
+  }
+  return faces as FaceTriple
+}
 
 export default function RPSAnimation({
   pool,
@@ -29,42 +47,52 @@ export default function RPSAnimation({
   const rafRef = useRef<number>(0)
   const prismRef = useRef<HTMLDivElement>(null)
 
-  // Stable face order — assign each pool item to a face slot (mod 3).
-  const faceItems = useMemo<[PackItem | null, PackItem | null, PackItem | null]>(() => {
-    if (pool.length === 0) return [null, null, null]
-    return [pool[0] ?? null, pool[1] ?? pool[0]!, pool[2] ?? pool[0]!]
-  }, [pool])
-
-  // Final landing offset: rotate so the face matching `result` ends up forward.
-  // Faces are placed at `rotateY(-120*i) translateZ(apothem)`, so total Y for
-  // face i = parent + (-120i). Camera-facing means total ≡ 0 (mod 360),
-  // so parent must equal +120 * i.
-  const landOffset = useMemo(() => {
-    if (!result) return 0
-    const idx = pool.findIndex((p) => p.value === result.value)
-    if (idx < 0) return 0
-    return 120 * (idx % 3)
-  }, [pool, result])
-
+  const [faceItems, setFaceItems] = useState<FaceTriple>(() =>
+    [pool[0] ?? null, pool[1] ?? null, pool[2] ?? null] as FaceTriple,
+  )
   const [activeFaceIdx, setActiveFaceIdx] = useState<number>(0)
 
   useEffect(() => {
-    if (!isSpinning || !result) {
-      const idx = pool.findIndex((p) => p.value === result?.value)
-      const targetRot = idx >= 0 ? 120 * (idx % 3) : 0
-      if (prismRef.current) prismRef.current.style.transform = `rotateY(${targetRot}deg)`
-      setActiveFaceIdx(idx >= 0 ? idx % 3 : 0)
+    if (!isSpinning) {
+      // Idle: if no result yet, show first 3 pool items as a preview;
+      // otherwise leave the cube exactly where the last spin landed it.
+      if (!result) {
+        setFaceItems([pool[0] ?? null, pool[1] ?? null, pool[2] ?? null] as FaceTriple)
+        if (prismRef.current) prismRef.current.style.transform = 'rotateY(0deg)'
+        setActiveFaceIdx(0)
+      }
       return
     }
+    if (!result) return
     completeFiredRef.current = false
 
+    const resultSlot = Math.floor(Math.random() * 3)
+    const initial = pickInitialFaces(pool, result, resultSlot)
+    setFaceItems(initial)
+
+    const finalRot = TOTAL_ROTATION + 120 * resultSlot
     const start = performance.now()
-    const finalRot = TOTAL_ROTATION + landOffset
+    let resultLockedIn = false
 
     const frame = (now: number) => {
       const t = Math.min((now - start) / durationMs, 1)
       const rot = easeOutCubic(t) * finalRot
       if (prismRef.current) prismRef.current.style.transform = `rotateY(${rot}deg)`
+
+      // Result-face world-Z normal: cos((rot - 120*resultSlot) deg). When that
+      // goes < ~0 the result face is back-facing — invisible — so we can swap
+      // its content to the actual result without the user noticing.
+      if (!resultLockedIn) {
+        const angle = ((rot - 120 * resultSlot) * Math.PI) / 180
+        if (Math.cos(angle) < -0.3) {
+          setFaceItems((prev) => {
+            const next = [...prev] as FaceTriple
+            next[resultSlot] = result
+            return next
+          })
+          resultLockedIn = true
+        }
+      }
 
       const normalizedRot = ((rot % 360) + 360) % 360
       const facing = Math.round(normalizedRot / 120) % 3
@@ -73,9 +101,16 @@ export default function RPSAnimation({
       if (t < 1) {
         rafRef.current = requestAnimationFrame(frame)
       } else {
+        // Defensive: ensure the resting slot has the result, in case the
+        // rotation never crossed the hidden threshold (shouldn't happen at
+        // 4 full turns but cheap insurance).
+        setFaceItems((prev) => {
+          const next = [...prev] as FaceTriple
+          next[resultSlot] = result
+          return next
+        })
         if (prismRef.current) prismRef.current.style.transform = `rotateY(${finalRot}deg)`
-        const idx = pool.findIndex((p) => p.value === result.value)
-        setActiveFaceIdx(idx >= 0 ? idx % 3 : 0)
+        setActiveFaceIdx(resultSlot)
         if (!completeFiredRef.current) {
           completeFiredRef.current = true
           onComplete()
@@ -85,7 +120,7 @@ export default function RPSAnimation({
 
     rafRef.current = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(rafRef.current)
-  }, [spinId, isSpinning, result, pool, durationMs, onComplete, landOffset])
+  }, [spinId, isSpinning, result, pool, durationMs, onComplete])
 
   const lit = result !== null
 

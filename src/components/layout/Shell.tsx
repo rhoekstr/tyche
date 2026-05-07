@@ -18,6 +18,15 @@ export default function Shell({ children }: { children: ReactNode }) {
           <NavPill to="/custom" active={pathname === '/custom'}>✏️ New List</NavPill>
           <NavPill to="/settings" active={pathname === '/settings'}>⚙️ Settings</NavPill>
         </div>
+        <a
+          href="https://www.awrylabs.com"
+          target="_blank"
+          rel="noreferrer"
+          className="ml-auto text-sm text-white/50 hover:text-white transition tracking-wide"
+          aria-label="awryLabs"
+        >
+          <span className="italic">awry</span><span className="font-bold">Labs</span>
+        </a>
       </header>
 
       {/* Two-column on desktop: sidebar + main */}

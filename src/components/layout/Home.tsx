@@ -127,18 +127,18 @@ export default function Home() {
         </div>
       )}
 
-      {/* Suggest a pack */}
+      {/* Suggest a list */}
       <div className="mt-12 mb-8 flex flex-col items-center gap-3 text-center">
         <p className="text-white/50 text-sm">Got an idea for a new list?</p>
         <a
-          href="mailto:hello@awrylabs.com?subject=So%20Random%20Pack%20Suggestion"
+          href="mailto:coffee@awrylabs.com?subject=Tyche%20List%20Suggestion"
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
             bg-ink-soft/60 ring-1 ring-white/15
             hover:ring-neon-violet hover:text-neon-violet hover:-translate-y-0.5
             text-white/70 text-sm font-medium transition-all duration-200"
         >
           <span>✨</span>
-          <span>Suggest a Pack</span>
+          <span>Suggest a List</span>
         </a>
       </div>
     </section>
