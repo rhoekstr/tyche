@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Shell from '@/components/layout/Shell'
 import Home from '@/components/layout/Home'
+import About from '@/components/layout/About'
 import Settings from '@/components/layout/Settings'
 import Randomizer from '@/components/randomizer/Randomizer'
 import MultiSlot from '@/components/randomizer/MultiSlot'
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/multi" element={<MultiSlot />} />
         <Route path="/custom" element={<CustomPackBuilder />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/about" element={<About />} />
         <Route path="/utility/coin" element={<CoinFlip />} />
         <Route path="/utility/dice" element={<DiceRoll />} />
         <Route path="/utility/rps" element={<RPS />} />
