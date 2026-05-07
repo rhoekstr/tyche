@@ -1,4 +1,4 @@
-const PREFIX = 'so-random:'
+const PREFIX = 'tyche:'
 
 export function storageGet<T>(key: string): T | null {
   try {

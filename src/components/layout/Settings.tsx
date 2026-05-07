@@ -28,7 +28,7 @@ export default function Settings() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'so-random-backup.json'
+    a.download = 'tyche-backup.json'
     a.click()
     URL.revokeObjectURL(url)
   }

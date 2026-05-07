@@ -10,7 +10,7 @@ export default function Shell({ children }: { children: ReactNode }) {
       <header className="px-6 pt-6 pb-2 flex items-center gap-4">
         <Link to="/" className="hover:opacity-80 transition inline-block">
           <h1 className="text-display text-3xl md:text-4xl bg-gradient-to-r from-neon-magenta via-neon-violet to-neon-cobalt bg-clip-text text-transparent">
-            So Random!
+            Tyche
           </h1>
         </Link>
         <div className="hidden md:flex items-center gap-2 ml-1">

@@ -50,7 +50,7 @@ export default function MultiSlot() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'so-random-configs.json'
+    a.download = 'tyche-configs.json'
     a.click()
     URL.revokeObjectURL(url)
   }

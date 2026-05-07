@@ -29,7 +29,7 @@ export function usePreferences() {
   // Sync across tabs
   useEffect(() => {
     const handler = (e: StorageEvent) => {
-      if (e.key === 'so-random:preferences') {
+      if (e.key === 'tyche:preferences') {
         setPrefs(loadPreferences())
       }
     }
