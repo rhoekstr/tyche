@@ -49,8 +49,8 @@ describe('filterItems', () => {
     expect(out.map((i) => i.value)).toEqual(['Curry', 'Taco'])
   })
 
-  it('returns empty pool when a dimension has no selected values', () => {
-    expect(filterItems(items, schema, { region: [] })).toEqual([])
+  it('treats an empty values array as "no filter on this dim"', () => {
+    expect(filterItems(items, schema, { region: [] })).toEqual(items)
   })
 })
 
@@ -105,7 +105,25 @@ describe('reconcileDrawState', () => {
 })
 
 describe('defaultActiveFilters', () => {
-  it('uses defaultFilters when defined', () => {
+  it('returns empty object when the pack has no filter schema', () => {
+    const pack: Pack = {
+      id: 'x',
+      version: '1',
+      meta: {
+        title: 'x',
+        description: '',
+        icon: '',
+        defaultAnimation: 'slot',
+        tags: [],
+        hierarchy: { level1: 'a', level2: 'b' },
+        source: 'official',
+      },
+      items,
+    }
+    expect(defaultActiveFilters(pack)).toEqual({})
+  })
+
+  it('starts with no filter selections regardless of pack-level defaultFilters', () => {
     const pack: Pack = {
       id: 'x',
       version: '1',
@@ -122,28 +140,7 @@ describe('defaultActiveFilters', () => {
       defaultFilters: { region: ['Asia'] },
       items,
     }
-    expect(defaultActiveFilters(pack)).toEqual({ region: ['Asia'] })
-  })
-
-  it('falls back to all distinct values per dimension when no defaultFilters', () => {
-    const pack: Pack = {
-      id: 'x',
-      version: '1',
-      meta: {
-        title: 'x',
-        description: '',
-        icon: '',
-        defaultAnimation: 'slot',
-        tags: [],
-        hierarchy: { level1: 'a', level2: 'b' },
-        source: 'official',
-      },
-      filters: schema,
-      items,
-    }
-    const out = defaultActiveFilters(pack)
-    expect(new Set(out.region)).toEqual(new Set(['Europe', 'Asia', 'Americas']))
-    expect(new Set(out.spice)).toEqual(new Set(['Mild', 'Medium', 'Hot']))
+    expect(defaultActiveFilters(pack)).toEqual({})
   })
 })
 

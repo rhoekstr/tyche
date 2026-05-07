@@ -14,7 +14,9 @@ export default function FilterPanel({ pack, api }: Props) {
   if (dimensions.length === 0) return null
 
   const { activeCount, totalPossible } = api
-  const isFiltered = activeCount < totalPossible
+  // Filters default to "none selected = no filter applied". The badge
+  // lights up only when the user has actively selected at least one chip.
+  const isFiltered = activeCount > 0
 
   return (
     <div className="w-full">

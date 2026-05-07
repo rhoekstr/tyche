@@ -44,6 +44,7 @@ export default function CoinAnimation({
 
     const start = performance.now()
     let lastPhase = 0
+    const numPhases = TOTAL_ROTATION / 180
 
     const frame = (now: number) => {
       const t = Math.min((now - start) / durationMs, 1)
@@ -53,8 +54,15 @@ export default function CoinAnimation({
       const phase = Math.floor(rot / 180)
       if (phase !== lastPhase) {
         lastPhase = phase
-        if (phase % 2 === 1) setFrontItem(pickItem())
-        else setBackItem(pickItem())
+        // Front is hidden during odd phases. The LAST odd phase before
+        // completion is when we lock the result onto the front face,
+        // so it's already showing the result by the time the rotation
+        // brings the front back into view at t=1 (no swap-pop).
+        if (phase % 2 === 1) {
+          setFrontItem(phase === numPhases - 1 ? result : pickItem())
+        } else {
+          setBackItem(pickItem())
+        }
       }
 
       if (t < 1) {

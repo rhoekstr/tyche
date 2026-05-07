@@ -302,20 +302,9 @@ function SlotCard({
   const effectiveAnimation = slot.animation ?? slot.pack?.meta.defaultAnimation ?? 'slot'
   const hasFilters = !!slot.pack?.filters && Object.keys(slot.pack.filters).length > 0
 
-  // Active filter count vs. total possible
-  const filterStats = (() => {
-    if (!slot.pack?.filters) return { active: 0, total: 0 }
-    let active = 0
-    let total = 0
-    for (const dim of Object.keys(slot.pack.filters)) {
-      const allValues = new Set<string>()
-      for (const it of slot.pack.items) for (const v of it.filters?.[dim] ?? []) allValues.add(v)
-      total += allValues.size
-      active += slot.activeFilters[dim]?.length ?? 0
-    }
-    return { active, total }
-  })()
-  const isFiltered = filterStats.active < filterStats.total
+  // Filters default to "none selected = unfiltered". The gear glows
+  // only when the user has chosen at least one chip somewhere.
+  const isFiltered = Object.values(slot.activeFilters).some((vs) => (vs?.length ?? 0) > 0)
 
   return (
     <div className="rounded-2xl bg-ink-soft/60 ring-1 ring-white/10 p-3">

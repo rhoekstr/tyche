@@ -108,6 +108,7 @@ export default function DiceAnimation({
       top: 0,
       bottom: 0,
     }
+    let frontHasBeenHidden = false
 
     const frame = (now: number) => {
       const t = Math.min((now - start) / durationMs, 1)
@@ -117,12 +118,18 @@ export default function DiceAnimation({
         cubeRef.current.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`
       }
 
+      // Once the resting face (front) has been hidden at any point in this
+      // spin, every later refresh of front uses `result`. This way when the
+      // cube settles and front rotates back into view at t=1, it's already
+      // showing the final value — no swap-pop.
       let pendingUpdates: Partial<Record<FaceKey, PackItem>> | null = null
       for (const key of FACE_KEYS) {
         const [, , wz] = rotateNormal(FACE_NORMALS[key], rx, ry)
-        if (wz < HIDDEN_THRESHOLD && now - lastUpdate[key] >= FACE_UPDATE_MS) {
+        const hidden = wz < HIDDEN_THRESHOLD
+        if (key === 'front' && hidden) frontHasBeenHidden = true
+        if (hidden && now - lastUpdate[key] >= FACE_UPDATE_MS) {
           if (!pendingUpdates) pendingUpdates = {}
-          pendingUpdates[key] = pickItem()
+          pendingUpdates[key] = key === 'front' && frontHasBeenHidden ? result : pickItem()
           lastUpdate[key] = now
         }
       }

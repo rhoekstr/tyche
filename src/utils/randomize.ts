@@ -6,13 +6,17 @@ export function filterItems(
   active: FilterValues | undefined,
 ): PackItem[] {
   if (!schema || !active) return items
-  const dimensions = Object.keys(active).filter((key) => schema[key])
+  // Only dimensions that are both in the schema AND have at least one
+  // selected value participate in filtering. Empty arrays (or missing
+  // keys) mean "no filter on this dim — accept anything".
+  const dimensions = Object.keys(active).filter(
+    (key) => schema[key] && (active[key]?.length ?? 0) > 0,
+  )
   if (dimensions.length === 0) return items
 
   return items.filter((item) =>
     dimensions.every((dim) => {
-      const selected = active[dim]
-      if (!selected || selected.length === 0) return false
+      const selected = active[dim]!
       const itemValues = item.filters?.[dim]
       if (!itemValues || itemValues.length === 0) return false
       return itemValues.some((v) => selected.includes(v))
@@ -89,15 +93,9 @@ export function reconcileDrawState(
 }
 
 export function defaultActiveFilters(pack: Pack): FilterValues {
+  // Default: no filter on any dimension. The user opts in by selecting
+  // chips. Empty / missing dim entries are treated as "accept anything"
+  // by filterItems.
   if (!pack.filters) return {}
-  if (pack.defaultFilters) return { ...pack.defaultFilters }
-  const all: FilterValues = {}
-  for (const key of Object.keys(pack.filters)) {
-    const values = new Set<string>()
-    for (const item of pack.items) {
-      for (const v of item.filters?.[key] ?? []) values.add(v)
-    }
-    all[key] = [...values]
-  }
-  return all
+  return {}
 }

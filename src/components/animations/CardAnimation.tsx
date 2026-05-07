@@ -43,17 +43,22 @@ export default function CardAnimation({
 
     const start = performance.now()
     let lastPhase = 0
+    const numPhases = TOTAL_ROTATION / 180
 
     const frame = (now: number) => {
       const t = Math.min((now - start) / durationMs, 1)
       const rot = easeOutCubic(t) * TOTAL_ROTATION
       if (cardRef.current) cardRef.current.style.transform = `rotateY(${rot}deg)`
 
-      // Update front face's content while it's hidden (after each 180° crossing into back-visible).
+      // Update front face's content while it's hidden. The last update
+      // before completion locks in `result`, so when the front rotates
+      // back into view at t=1 it's already showing the final value.
       const phase = Math.floor(rot / 180)
       if (phase !== lastPhase) {
         lastPhase = phase
-        if (phase % 2 === 1) setFrontItem(pickItem())
+        if (phase % 2 === 1) {
+          setFrontItem(phase === numPhases - 1 ? result : pickItem())
+        }
       }
 
       if (t < 1) {
