@@ -11,11 +11,21 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Mountain Cabin" }, { "value": "Beach Weekend" }, { "value": "City Break" },
-    { "value": "Road Trip" }, { "value": "Camping" }, { "value": "National Park Hike" },
-    { "value": "Wine Country" }, { "value": "Hot Springs" }, { "value": "Ski Trip" },
-    { "value": "Island Getaway" }, { "value": "Spa Retreat" }, { "value": "Music Festival" },
-    { "value": "Historical Town" }, { "value": "Waterfall Chase" }, { "value": "Food Tour" }
+    { "value": "Mountain Cabin", "icon": "🏔️" },
+    { "value": "Beach Weekend", "icon": "🏖️" },
+    { "value": "City Break", "icon": "🏙️" },
+    { "value": "Road Trip", "icon": "🚗" },
+    { "value": "Camping", "icon": "⛺" },
+    { "value": "National Park Hike", "icon": "🥾" },
+    { "value": "Wine Country", "icon": "🍷" },
+    { "value": "Hot Springs", "icon": "♨️" },
+    { "value": "Ski Trip", "icon": "⛷️" },
+    { "value": "Island Getaway", "icon": "🏝️" },
+    { "value": "Spa Retreat", "icon": "💆" },
+    { "value": "Music Festival", "icon": "🎵" },
+    { "value": "Historical Town", "icon": "🏛️" },
+    { "value": "Waterfall Chase", "icon": "💦" },
+    { "value": "Food Tour", "icon": "🍴" }
   ],
   "sampling": { "replacement": true }
 }

@@ -11,13 +11,26 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Pancakes" }, { "value": "Waffles" }, { "value": "French Toast" },
-    { "value": "Eggs Benedict" }, { "value": "Avocado Toast" }, { "value": "Omelette" },
-    { "value": "Bagel & Lox" }, { "value": "Granola & Yogurt" }, { "value": "Smoothie Bowl" },
-    { "value": "Breakfast Burrito" }, { "value": "Shakshuka" }, { "value": "Overnight Oats" },
-    { "value": "Croissant" }, { "value": "Acai Bowl" }, { "value": "Full English" },
-    { "value": "Crepes" }, { "value": "Breakfast Sandwich" }, { "value": "Dim Sum" },
-    { "value": "Ful Medames" }, { "value": "Congee" }
+    { "value": "Pancakes", "icon": "🥞" },
+    { "value": "Waffles", "icon": "🧇" },
+    { "value": "French Toast", "icon": "🍞" },
+    { "value": "Eggs Benedict", "icon": "🥚" },
+    { "value": "Avocado Toast", "icon": "🥑" },
+    { "value": "Omelette", "icon": "🍳" },
+    { "value": "Bagel & Lox", "icon": "🥯" },
+    { "value": "Granola & Yogurt", "icon": "🥛" },
+    { "value": "Smoothie Bowl", "icon": "🍓" },
+    { "value": "Breakfast Burrito", "icon": "🌯" },
+    { "value": "Shakshuka", "icon": "🍅" },
+    { "value": "Overnight Oats", "icon": "🥣" },
+    { "value": "Croissant", "icon": "🥐" },
+    { "value": "Acai Bowl", "icon": "🍇" },
+    { "value": "Full English", "icon": "🇬🇧" },
+    { "value": "Crepes", "icon": "🥞" },
+    { "value": "Breakfast Sandwich", "icon": "🥪" },
+    { "value": "Dim Sum", "icon": "🥟" },
+    { "value": "Ful Medames", "icon": "🫘" },
+    { "value": "Congee", "icon": "🍚" }
   ],
   "sampling": { "replacement": true }
 }

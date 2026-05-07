@@ -11,8 +11,14 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Eat In" }, { "value": "Takeout" }, { "value": "Delivery" }, { "value": "Drive-Through" },
-    { "value": "Cook at Home" }, { "value": "Meal Kit" }, { "value": "Picnic" }, { "value": "Food Truck" }
+    { "value": "Eat In", "icon": "🍽️" },
+    { "value": "Takeout", "icon": "🥡" },
+    { "value": "Delivery", "icon": "🛵" },
+    { "value": "Drive-Through", "icon": "🚗" },
+    { "value": "Cook at Home", "icon": "👨‍🍳" },
+    { "value": "Meal Kit", "icon": "📦" },
+    { "value": "Picnic", "icon": "🧺" },
+    { "value": "Food Truck", "icon": "🚚" }
   ],
   "sampling": { "replacement": true }
 }

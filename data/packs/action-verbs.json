@@ -11,12 +11,30 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Shatter" }, { "value": "Unearth" }, { "value": "Weave" }, { "value": "Ignite" },
-    { "value": "Vanish" }, { "value": "Summon" }, { "value": "Devour" }, { "value": "Ascend" },
-    { "value": "Betray" }, { "value": "Discover" }, { "value": "Collapse" }, { "value": "Transform" },
-    { "value": "Drift" }, { "value": "Haunt" }, { "value": "Forge" }, { "value": "Flee" },
-    { "value": "Construct" }, { "value": "Whisper" }, { "value": "Conquer" }, { "value": "Dissolve" },
-    { "value": "Illuminate" }, { "value": "Pursue" }, { "value": "Rebuild" }, { "value": "Sacrifice" }
+    { "value": "Shatter", "icon": "💥" },
+    { "value": "Unearth", "icon": "⛏️" },
+    { "value": "Weave", "icon": "🧵" },
+    { "value": "Ignite", "icon": "🔥" },
+    { "value": "Vanish", "icon": "💨" },
+    { "value": "Summon", "icon": "🪄" },
+    { "value": "Devour", "icon": "🦷" },
+    { "value": "Ascend", "icon": "⬆️" },
+    { "value": "Betray", "icon": "🗡️" },
+    { "value": "Discover", "icon": "🔍" },
+    { "value": "Collapse", "icon": "🧱" },
+    { "value": "Transform", "icon": "🦋" },
+    { "value": "Drift", "icon": "🍃" },
+    { "value": "Haunt", "icon": "👻" },
+    { "value": "Forge", "icon": "🔨" },
+    { "value": "Flee", "icon": "🏃" },
+    { "value": "Construct", "icon": "🏗️" },
+    { "value": "Whisper", "icon": "🤫" },
+    { "value": "Conquer", "icon": "👑" },
+    { "value": "Dissolve", "icon": "💧" },
+    { "value": "Illuminate", "icon": "💡" },
+    { "value": "Pursue", "icon": "🏃" },
+    { "value": "Rebuild", "icon": "🛠️" },
+    { "value": "Sacrifice", "icon": "🗡️" }
   ],
   "sampling": { "replacement": true }
 }

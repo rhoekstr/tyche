@@ -11,16 +11,26 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "A heist gone wrong" }, { "value": "Two strangers on a train" },
-    { "value": "The last library on Earth" }, { "value": "A city built on water" },
-    { "value": "Time travel to fix one mistake" }, { "value": "An AI falls in love" },
-    { "value": "The final expedition" }, { "value": "A map to nowhere" },
-    { "value": "Something ordinary becomes extraordinary" }, { "value": "The letter never sent" },
-    { "value": "A world where dreams are recorded" }, { "value": "The last human on the moon" },
-    { "value": "A secret society of gardeners" }, { "value": "Everyone can read minds except one" },
-    { "value": "A revolution begins in a kitchen" }, { "value": "The storm that never ended" },
-    { "value": "A conversation between enemies" }, { "value": "The day gravity reversed" },
-    { "value": "A machine that grants one wish" }, { "value": "The city that forgot its name" }
+    { "value": "A heist gone wrong", "icon": "💰" },
+    { "value": "Two strangers on a train", "icon": "🚂" },
+    { "value": "The last library on Earth", "icon": "📚", "shortLabel": "Last library" },
+    { "value": "A city built on water", "icon": "🌊" },
+    { "value": "Time travel to fix one mistake", "icon": "⏳", "shortLabel": "Time travel fix" },
+    { "value": "An AI falls in love", "icon": "🤖" },
+    { "value": "The final expedition", "icon": "🧭" },
+    { "value": "A map to nowhere", "icon": "🗺️" },
+    { "value": "Something ordinary becomes extraordinary", "icon": "✨", "shortLabel": "Ordinary turns wondrous" },
+    { "value": "The letter never sent", "icon": "💌" },
+    { "value": "A world where dreams are recorded", "icon": "💭", "shortLabel": "Recorded dreams" },
+    { "value": "The last human on the moon", "icon": "🌕", "shortLabel": "Last on the moon" },
+    { "value": "A secret society of gardeners", "icon": "🌱", "shortLabel": "Secret gardeners" },
+    { "value": "Everyone can read minds except one", "icon": "🧠", "shortLabel": "Mind readers" },
+    { "value": "A revolution begins in a kitchen", "icon": "🔪", "shortLabel": "Kitchen revolution" },
+    { "value": "The storm that never ended", "icon": "⛈️", "shortLabel": "Endless storm" },
+    { "value": "A conversation between enemies", "icon": "⚔️", "shortLabel": "Enemy talk" },
+    { "value": "The day gravity reversed", "icon": "🪂", "shortLabel": "Gravity reversed" },
+    { "value": "A machine that grants one wish", "icon": "🪄", "shortLabel": "Wish machine" },
+    { "value": "The city that forgot its name", "icon": "🏙️", "shortLabel": "Nameless city" }
   ],
   "sampling": { "replacement": true }
 }

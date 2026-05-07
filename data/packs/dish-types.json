@@ -11,12 +11,30 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Soup" }, { "value": "Salad" }, { "value": "Sandwich" }, { "value": "Burger" },
-    { "value": "Pizza" }, { "value": "Pasta" }, { "value": "Tacos" }, { "value": "Sushi" },
-    { "value": "Stir Fry" }, { "value": "Curry" }, { "value": "Grilled Meats" }, { "value": "Stew" },
-    { "value": "Ramen" }, { "value": "Dim Sum" }, { "value": "Seafood" }, { "value": "BBQ" },
-    { "value": "Flatbread" }, { "value": "Rice Bowl" }, { "value": "Dumplings" }, { "value": "Charcuterie" },
-    { "value": "Grain Bowl" }, { "value": "Noodles" }, { "value": "Wraps" }, { "value": "Roast" }
+    { "value": "Soup", "icon": "🍲" },
+    { "value": "Salad", "icon": "🥗" },
+    { "value": "Sandwich", "icon": "🥪" },
+    { "value": "Burger", "icon": "🍔" },
+    { "value": "Pizza", "icon": "🍕" },
+    { "value": "Pasta", "icon": "🍝" },
+    { "value": "Tacos", "icon": "🌮" },
+    { "value": "Sushi", "icon": "🍣" },
+    { "value": "Stir Fry", "icon": "🥡" },
+    { "value": "Curry", "icon": "🍛" },
+    { "value": "Grilled Meats", "icon": "🥩" },
+    { "value": "Stew", "icon": "🍲" },
+    { "value": "Ramen", "icon": "🍜" },
+    { "value": "Dim Sum", "icon": "🥟" },
+    { "value": "Seafood", "icon": "🦐" },
+    { "value": "BBQ", "icon": "🍖" },
+    { "value": "Flatbread", "icon": "🫓" },
+    { "value": "Rice Bowl", "icon": "🍚" },
+    { "value": "Dumplings", "icon": "🥟" },
+    { "value": "Charcuterie", "icon": "🧀" },
+    { "value": "Grain Bowl", "icon": "🥣" },
+    { "value": "Noodles", "icon": "🍜" },
+    { "value": "Wraps", "icon": "🌯" },
+    { "value": "Roast", "icon": "🍗" }
   ],
   "sampling": { "replacement": true }
 }

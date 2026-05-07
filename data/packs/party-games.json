@@ -11,12 +11,24 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Jackbox Party Pack" }, { "value": "Werewolf / Mafia" }, { "value": "Charades" },
-    { "value": "Pictionary" }, { "value": "Trivia" }, { "value": "Never Have I Ever" },
-    { "value": "Two Truths and a Lie" }, { "value": "Bingo" }, { "value": "Karaoke" },
-    { "value": "Heads Up!" }, { "value": "Telestrations" }, { "value": "What Do You Meme?" },
-    { "value": "Fibbage" }, { "value": "Quiplash" }, { "value": "The Resistance" },
-    { "value": "Uno" }, { "value": "Spyfall" }, { "value": "Wits & Wagers" }
+    { "value": "Jackbox Party Pack", "icon": "📦" },
+    { "value": "Werewolf / Mafia", "icon": "🐺" },
+    { "value": "Charades", "icon": "🎭" },
+    { "value": "Pictionary", "icon": "🎨" },
+    { "value": "Trivia", "icon": "❓" },
+    { "value": "Never Have I Ever", "icon": "🙋" },
+    { "value": "Two Truths and a Lie", "icon": "🤥" },
+    { "value": "Bingo", "icon": "🎰" },
+    { "value": "Karaoke", "icon": "🎤" },
+    { "value": "Heads Up!", "icon": "📱" },
+    { "value": "Telestrations", "icon": "✏️" },
+    { "value": "What Do You Meme?", "icon": "🤣" },
+    { "value": "Fibbage", "icon": "🤥" },
+    { "value": "Quiplash", "icon": "💬" },
+    { "value": "The Resistance", "icon": "🕵️" },
+    { "value": "Uno", "icon": "🎴" },
+    { "value": "Spyfall", "icon": "🕴️" },
+    { "value": "Wits & Wagers", "icon": "🎲" }
   ],
   "sampling": { "replacement": true }
 }

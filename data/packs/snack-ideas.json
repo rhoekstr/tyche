@@ -11,12 +11,23 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Apple slices & peanut butter" }, { "value": "Cheese & crackers" },
-    { "value": "Popcorn" }, { "value": "Trail mix" }, { "value": "Hummus & veggies" },
-    { "value": "Yogurt parfait" }, { "value": "Fruit skewers" }, { "value": "Ants on a log" },
-    { "value": "Frozen grapes" }, { "value": "Quesadilla" }, { "value": "Edamame" },
-    { "value": "Rice cakes & avocado" }, { "value": "Smoothie" }, { "value": "Nachos" },
-    { "value": "Hard-boiled eggs" }, { "value": "Pita & tzatziki" }, { "value": "Banana nice cream" }
+    { "value": "Apple slices & peanut butter", "icon": "🍎", "shortLabel": "Apple & PB" },
+    { "value": "Cheese & crackers", "icon": "🧀" },
+    { "value": "Popcorn", "icon": "🍿" },
+    { "value": "Trail mix", "icon": "🥜" },
+    { "value": "Hummus & veggies", "icon": "🥕" },
+    { "value": "Yogurt parfait", "icon": "🍨" },
+    { "value": "Fruit skewers", "icon": "🍢" },
+    { "value": "Ants on a log", "icon": "🪵" },
+    { "value": "Frozen grapes", "icon": "🍇" },
+    { "value": "Quesadilla", "icon": "🫓" },
+    { "value": "Edamame", "icon": "🫛" },
+    { "value": "Rice cakes & avocado", "icon": "🥑" },
+    { "value": "Smoothie", "icon": "🥤" },
+    { "value": "Nachos", "icon": "🌽" },
+    { "value": "Hard-boiled eggs", "icon": "🥚" },
+    { "value": "Pita & tzatziki", "icon": "🥒" },
+    { "value": "Banana nice cream", "icon": "🍌" }
   ],
   "sampling": { "replacement": true }
 }

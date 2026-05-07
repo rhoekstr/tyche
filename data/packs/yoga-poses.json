@@ -11,14 +11,30 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Downward Dog" }, { "value": "Warrior I" }, { "value": "Warrior II" },
-    { "value": "Warrior III" }, { "value": "Triangle Pose" }, { "value": "Tree Pose" },
-    { "value": "Chair Pose" }, { "value": "Child's Pose" }, { "value": "Cobra" },
-    { "value": "Upward Dog" }, { "value": "Bridge Pose" }, { "value": "Pigeon Pose" },
-    { "value": "Camel Pose" }, { "value": "Crow Pose" }, { "value": "Headstand" },
-    { "value": "Handstand" }, { "value": "Half Moon" }, { "value": "Eagle Pose" },
-    { "value": "Boat Pose" }, { "value": "Seated Forward Fold" }, { "value": "Supine Twist" },
-    { "value": "Plank" }, { "value": "Side Plank" }, { "value": "Happy Baby" }
+    { "value": "Downward Dog", "icon": "🐕" },
+    { "value": "Warrior I", "icon": "⚔️" },
+    { "value": "Warrior II", "icon": "⚔️" },
+    { "value": "Warrior III", "icon": "⚔️" },
+    { "value": "Triangle Pose", "icon": "🔺" },
+    { "value": "Tree Pose", "icon": "🌳" },
+    { "value": "Chair Pose", "icon": "🪑" },
+    { "value": "Child's Pose", "icon": "🧘" },
+    { "value": "Cobra", "icon": "🐍" },
+    { "value": "Upward Dog", "icon": "🐕" },
+    { "value": "Bridge Pose", "icon": "🌉" },
+    { "value": "Pigeon Pose", "icon": "🕊️" },
+    { "value": "Camel Pose", "icon": "🐪" },
+    { "value": "Crow Pose", "icon": "🐦‍⬛" },
+    { "value": "Headstand", "icon": "🙃" },
+    { "value": "Handstand", "icon": "🤸" },
+    { "value": "Half Moon", "icon": "🌗" },
+    { "value": "Eagle Pose", "icon": "🦅" },
+    { "value": "Boat Pose", "icon": "⛵" },
+    { "value": "Seated Forward Fold", "icon": "🙇", "shortLabel": "Forward Fold" },
+    { "value": "Supine Twist", "icon": "🌀" },
+    { "value": "Plank", "icon": "📏" },
+    { "value": "Side Plank", "icon": "📐" },
+    { "value": "Happy Baby", "icon": "👶" }
   ],
   "sampling": { "replacement": true }
 }
