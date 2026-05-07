@@ -23,7 +23,20 @@ export default function Shell({ children }: { children: ReactNode }) {
       {/* Two-column on desktop: sidebar + main */}
       <div className="flex flex-1">
         <aside className="hidden md:flex flex-col w-44 shrink-0 px-4 py-2 border-r border-white/10">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/40 px-4 pb-3">Utilities</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-white/40 px-4 pb-3">Lists</p>
+          <Link
+            to="/"
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition text-sm ${
+              pathname === '/'
+                ? 'bg-neon-violet/20 text-neon-magenta ring-1 ring-neon-violet/40'
+                : 'text-white/70 hover:text-white hover:bg-ink-veil'
+            }`}
+          >
+            <span className="text-xl">📚</span>
+            <span className="uppercase tracking-widest">Browse</span>
+          </Link>
+
+          <p className="mt-6 text-xs uppercase tracking-[0.3em] text-white/40 px-4 pb-3">Utilities</p>
           <DesktopUtilityNav />
         </aside>
 
