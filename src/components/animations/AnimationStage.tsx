@@ -3,6 +3,7 @@ import SlotMachine from './SlotMachine'
 import CoinAnimation from './CoinAnimation'
 import DiceAnimation from './DiceAnimation'
 import CardAnimation from './CardAnimation'
+import RPSAnimation from './RPSAnimation'
 
 interface Props {
   mode: AnimationMode
@@ -22,6 +23,8 @@ export default function AnimationStage(props: Props) {
       return <DiceAnimation {...props} />
     case 'card':
       return <CardAnimation {...props} />
+    case 'rps':
+      return <RPSAnimation {...props} />
     default:
       return <SlotMachine {...props} />
   }

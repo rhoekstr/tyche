@@ -7,7 +7,7 @@ import {
   reconcileDrawState,
   type DrawState,
 } from '@/utils/randomize'
-import { resolveSampling, type FilterValues, type Pack, type PackItem } from '@/types/pack'
+import { resolveSampling, type AnimationMode, type FilterValues, type Pack, type PackItem } from '@/types/pack'
 
 export interface SlotState {
   /** client-only id */
@@ -15,12 +15,14 @@ export interface SlotState {
   packId: string | null
   pack: Pack | null
   activeFilters: FilterValues
+  /** Per-slot animation override; falls back to pack.meta.defaultAnimation when null. */
+  animation: AnimationMode | null
   result: PackItem | null
   isSpinning: boolean
   spinId: number
 }
 
-export type SlotUpdate = Partial<Pick<SlotState, 'packId' | 'pack' | 'activeFilters'>>
+export type SlotUpdate = Partial<Pick<SlotState, 'packId' | 'pack' | 'activeFilters' | 'animation'>>
 
 const MIN_STOP_MS = 1000
 const STAGGER_MS = 350
@@ -139,6 +141,7 @@ function makeSlot(index: number): SlotState {
     packId: null,
     pack: null,
     activeFilters: {},
+    animation: null,
     result: null,
     isSpinning: false,
     spinId: 0,

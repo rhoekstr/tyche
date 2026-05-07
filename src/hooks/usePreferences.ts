@@ -15,6 +15,7 @@ const BASE_DURATIONS: Record<string, number> = {
   coin: 1200,
   dice: 1400,
   card: 1000,
+  rps: 1300,
 }
 
 const SPEED_MULTIPLIER: Record<UserPreferences['animationSpeed'], number> = {

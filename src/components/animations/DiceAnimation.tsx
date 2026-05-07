@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { PackItem } from '@/types/pack'
+import { faceLabel } from '@/utils/faceText'
 
 interface Props {
   pool: PackItem[]
@@ -69,35 +70,33 @@ export default function DiceAnimation({
   const completeFiredRef = useRef(false)
   const rafRef = useRef<number>(0)
   const cubeRef = useRef<HTMLDivElement>(null)
-  const [faceValues, setFaceValues] = useState<Record<FaceKey, string>>(() => ({
-    front: result?.value ?? '?',
-    back: '?',
-    right: '?',
-    left: '?',
-    top: '?',
-    bottom: '?',
+  const [faceItems, setFaceItems] = useState<Record<FaceKey, PackItem | null>>(() => ({
+    front: result,
+    back: null,
+    right: null,
+    left: null,
+    top: null,
+    bottom: null,
   }))
 
   useEffect(() => {
     if (!isSpinning || !result) {
-      setFaceValues((prev) => ({ ...prev, front: result?.value ?? '?' }))
+      setFaceItems((prev) => ({ ...prev, front: result }))
       if (cubeRef.current) cubeRef.current.style.transform = 'rotateX(0deg) rotateY(0deg)'
       return
     }
     completeFiredRef.current = false
 
-    const pickValue = (): string =>
-      pool.length > 0
-        ? (pool[Math.floor(Math.random() * pool.length)]?.value ?? result.value)
-        : result.value
+    const pickItem = (): PackItem =>
+      pool.length > 0 ? (pool[Math.floor(Math.random() * pool.length)] ?? result) : result
 
-    setFaceValues({
-      front: pickValue(),
-      back: pickValue(),
-      right: pickValue(),
-      left: pickValue(),
-      top: pickValue(),
-      bottom: pickValue(),
+    setFaceItems({
+      front: pickItem(),
+      back: pickItem(),
+      right: pickItem(),
+      left: pickItem(),
+      top: pickItem(),
+      bottom: pickItem(),
     })
 
     const start = performance.now()
@@ -118,23 +117,23 @@ export default function DiceAnimation({
         cubeRef.current.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`
       }
 
-      let pendingUpdates: Partial<Record<FaceKey, string>> | null = null
+      let pendingUpdates: Partial<Record<FaceKey, PackItem>> | null = null
       for (const key of FACE_KEYS) {
         const [, , wz] = rotateNormal(FACE_NORMALS[key], rx, ry)
         if (wz < HIDDEN_THRESHOLD && now - lastUpdate[key] >= FACE_UPDATE_MS) {
           if (!pendingUpdates) pendingUpdates = {}
-          pendingUpdates[key] = pickValue()
+          pendingUpdates[key] = pickItem()
           lastUpdate[key] = now
         }
       }
       if (pendingUpdates) {
-        setFaceValues((prev) => ({ ...prev, ...pendingUpdates }))
+        setFaceItems((prev) => ({ ...prev, ...pendingUpdates }))
       }
 
       if (t < 1) {
         rafRef.current = requestAnimationFrame(frame)
       } else {
-        setFaceValues((prev) => ({ ...prev, front: result.value }))
+        setFaceItems((prev) => ({ ...prev, front: result }))
         if (cubeRef.current) {
           cubeRef.current.style.transform = `rotateX(${TOTAL_X}deg) rotateY(${TOTAL_Y}deg)`
         }
@@ -164,18 +163,22 @@ export default function DiceAnimation({
         }}
       >
         {FACE_KEYS.map((key) => (
-          <DieFace key={key} face={key} value={faceValues[key]} lit={lit} />
+          <DieFace key={key} face={key} item={faceItems[key]} lit={lit} />
         ))}
       </div>
     </div>
   )
 }
 
-function DieFace({ face, value, lit }: { face: FaceKey; value: string; lit: boolean }) {
-  const fontSize = value.length > 10 ? '0.875rem' : value.length > 6 ? '1.125rem' : '1.5rem'
+function DieFace({ face, item, lit }: { face: FaceKey; item: PackItem | null; lit: boolean }) {
+  const { text, fontSize } = faceLabel(item, {
+    maxChars: 10,
+    sizes: ['1.5rem', '1.125rem', '0.875rem'],
+  })
+  const icon = item?.icon
   return (
     <div
-      className={`absolute inset-0 rounded-2xl flex items-center justify-center text-display text-center leading-tight px-3 ${
+      className={`absolute inset-0 rounded-2xl flex flex-col items-center justify-center text-display text-center leading-tight px-3 gap-1 ${
         lit
           ? 'bg-gradient-to-br from-neon-violet via-neon-cobalt to-neon-cyan text-white shadow-[0_0_60px_-8px_rgba(138,43,226,0.9)]'
           : 'bg-ink-veil ring-2 ring-white/20 text-white/40'
@@ -184,10 +187,14 @@ function DieFace({ face, value, lit }: { face: FaceKey; value: string; lit: bool
         transform: FACE_TRANSFORMS[face],
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        fontSize,
       }}
     >
-      <span className="line-clamp-3">{value}</span>
+      {icon && <span className="text-3xl leading-none">{icon}</span>}
+      {text && (
+        <span style={{ fontSize }} className="line-clamp-2">
+          {text}
+        </span>
+      )}
     </div>
   )
 }

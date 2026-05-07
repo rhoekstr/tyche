@@ -1,22 +1,30 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import RPSAnimation from '@/components/animations/RPSAnimation'
+import { usePreferences } from '@/hooks/usePreferences'
+import type { PackItem } from '@/types/pack'
 
-const THROWS = [
-  { name: 'Rock', emoji: '🪨' },
-  { name: 'Paper', emoji: '📄' },
-  { name: 'Scissors', emoji: '✂️' },
-] as const
-
-type Throw = typeof THROWS[number]
+const POOL: PackItem[] = [
+  { value: 'Rock', icon: '🪨' },
+  { value: 'Paper', icon: '📄' },
+  { value: 'Scissors', icon: '✂️' },
+]
 
 export default function RPS() {
-  const [result, setResult] = useState<Throw | null>(null)
-  const [key, setKey] = useState(0)
+  const [result, setResult] = useState<PackItem | null>(null)
+  const [spinId, setSpinId] = useState(0)
+  const [isSpinning, setIsSpinning] = useState(false)
+  const { durationFor } = usePreferences()
 
-  function pick() {
-    setResult(THROWS[Math.floor(Math.random() * THROWS.length)]!)
-    setKey((k) => k + 1)
-  }
+  const pick = useCallback(() => {
+    if (isSpinning) return
+    setResult(POOL[Math.floor(Math.random() * POOL.length)]!)
+    setSpinId((n) => n + 1)
+    setIsSpinning(true)
+  }, [isSpinning])
+
+  const handleComplete = useCallback(() => setIsSpinning(false), [])
+  const duration = useMemo(() => durationFor('rps'), [durationFor])
 
   return (
     <section className="mx-auto max-w-sm pt-6 text-center">
@@ -29,30 +37,39 @@ export default function RPS() {
         Your throw is randomly assigned. Compare in person.
       </p>
 
-      <div className="mt-10 flex items-center justify-center">
-        <div
-          key={key}
-          className={`w-40 h-40 rounded-3xl flex flex-col items-center justify-center gap-2 transition-all ${
-            result
-              ? 'bg-gradient-to-br from-neon-acid/30 to-neon-cyan/20 ring-1 ring-neon-acid shadow-[0_0_60px_-8px_rgba(124,255,78,0.7)]'
-              : 'bg-ink-veil ring-2 ring-white/20'
-          }`}
-        >
-          <span className="text-6xl">{result?.emoji ?? '🎲'}</span>
-          {result && (
-            <span className="text-display text-sm uppercase tracking-widest text-neon-acid">
-              {result.name}
-            </span>
-          )}
+      {/* Idle "panel" preview when no result yet — show all three options. */}
+      {!result && !isSpinning ? (
+        <div className="mt-8 flex justify-center gap-3">
+          {POOL.map((item) => (
+            <div
+              key={item.value}
+              className="flex flex-col items-center justify-center gap-2 w-24 h-32 rounded-2xl bg-ink-veil ring-1 ring-white/15"
+            >
+              <span className="text-4xl leading-none">{item.icon}</span>
+              <span className="text-display text-xs uppercase tracking-widest text-white/60">{item.value}</span>
+            </div>
+          ))}
         </div>
-      </div>
+      ) : (
+        <div className="mt-8">
+          <RPSAnimation
+            pool={POOL}
+            result={result}
+            spinId={spinId}
+            isSpinning={isSpinning}
+            onComplete={handleComplete}
+            durationMs={duration}
+          />
+        </div>
+      )}
 
       <button
         type="button"
         onClick={pick}
-        className="mt-10 text-display text-xl uppercase tracking-widest px-10 py-4 rounded-full bg-gradient-to-r from-neon-acid to-neon-cyan text-ink shadow-[0_0_40px_-8px_rgba(124,255,78,0.7)] hover:brightness-110 active:scale-95 transition"
+        disabled={isSpinning}
+        className="mt-10 text-display text-xl uppercase tracking-widest px-10 py-4 rounded-full bg-gradient-to-r from-neon-acid to-neon-cyan text-ink shadow-[0_0_40px_-8px_rgba(124,255,78,0.7)] hover:brightness-110 active:scale-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {result ? 'Pick Again' : 'Pick'}
+        {isSpinning ? 'Throwing…' : result ? 'Pick Again' : 'Pick'}
       </button>
     </section>
   )

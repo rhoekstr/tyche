@@ -5,6 +5,7 @@ const MODES: { mode: AnimationMode; emoji: string; label: string }[] = [
   { mode: 'coin', emoji: '🪙', label: 'Coin' },
   { mode: 'dice', emoji: '🎲', label: 'Dice' },
   { mode: 'card', emoji: '🃏', label: 'Card' },
+  { mode: 'rps', emoji: '✊', label: 'RPS' },
 ]
 
 interface Props {

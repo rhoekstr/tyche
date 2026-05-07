@@ -10,8 +10,13 @@ interface Props {
   durationMs?: number
 }
 
-/** Card flips face-down (90deg), pauses, then flips face-up revealing the result */
+const TOTAL_ROTATION = 1440
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
+
+const RED_SUITS = new Set(['♥', '♦', '❤️', '♦️', '♥️'])
+
 export default function CardAnimation({
+  pool,
   result,
   spinId,
   isSpinning,
@@ -19,64 +24,126 @@ export default function CardAnimation({
   durationMs = 1000,
 }: Props) {
   const completeFiredRef = useRef(false)
-  const [phase, setPhase] = useState<'idle' | 'facedown' | 'faceup'>('idle')
+  const rafRef = useRef<number>(0)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [frontItem, setFrontItem] = useState<PackItem | null>(result)
 
   useEffect(() => {
-    if (!isSpinning || !result) return
+    if (!isSpinning || !result) {
+      setFrontItem(result)
+      if (cardRef.current) cardRef.current.style.transform = 'rotateY(0deg)'
+      return
+    }
     completeFiredRef.current = false
-    setPhase('facedown')
 
-    const half = durationMs / 2
+    const pickItem = (): PackItem =>
+      pool.length > 0 ? (pool[Math.floor(Math.random() * pool.length)] ?? result) : result
 
-    const t1 = setTimeout(() => setPhase('faceup'), half)
-    const t2 = setTimeout(() => {
-      if (completeFiredRef.current) return
-      completeFiredRef.current = true
-      onComplete()
-    }, durationMs + 20)
+    setFrontItem(pickItem())
 
-    return () => { clearTimeout(t1); clearTimeout(t2) }
-  }, [spinId, isSpinning, result, durationMs, onComplete])
+    const start = performance.now()
+    let lastPhase = 0
 
-  // When spin completes from outside (e.g. skip), reset to idle
-  useEffect(() => {
-    if (!isSpinning && phase === 'facedown') setPhase('idle')
-  }, [isSpinning, phase])
+    const frame = (now: number) => {
+      const t = Math.min((now - start) / durationMs, 1)
+      const rot = easeOutCubic(t) * TOTAL_ROTATION
+      if (cardRef.current) cardRef.current.style.transform = `rotateY(${rot}deg)`
 
-  // Show face when in faceup phase OR when resting with a result
-  const showFace = (phase === 'faceup' || (!isSpinning && phase !== 'facedown')) && result !== null
+      // Update front face's content while it's hidden (after each 180° crossing into back-visible).
+      const phase = Math.floor(rot / 180)
+      if (phase !== lastPhase) {
+        lastPhase = phase
+        if (phase % 2 === 1) setFrontItem(pickItem())
+      }
+
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(frame)
+      } else {
+        setFrontItem(result)
+        if (cardRef.current) cardRef.current.style.transform = `rotateY(${TOTAL_ROTATION}deg)`
+        if (!completeFiredRef.current) {
+          completeFiredRef.current = true
+          onComplete()
+        }
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(frame)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [spinId, isSpinning, result, pool, durationMs, onComplete])
+
+  const lit = result !== null
 
   return (
-    <div className="flex justify-center" style={{ perspective: '800px' }}>
+    <div className="flex justify-center" style={{ perspective: '900px' }}>
       <div
-        key={spinId}
-        className="w-36 h-52 transition-all duration-500"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: phase === 'facedown' ? 'rotateY(90deg)' : 'rotateY(0deg)',
-          transition: `transform ${durationMs / 2}ms cubic-bezier(0.4, 0, 0.2, 1)`,
-        }}
+        ref={cardRef}
+        className="relative w-36 h-52 will-change-transform"
+        style={{ transformStyle: 'preserve-3d', transform: 'rotateY(0deg)' }}
       >
-        {showFace ? (
-          <div className="w-full h-full rounded-2xl bg-white flex flex-col items-center justify-center gap-2 shadow-2xl shadow-[0_0_40px_rgba(255,43,214,0.4)]">
-            <span className="text-display text-3xl text-gray-900 font-bold">
-              {result.value}
-            </span>
-          </div>
-        ) : (
-          <div
-            className={`w-full h-full rounded-2xl flex items-center justify-center ${
-              phase === 'facedown'
-                ? 'bg-gradient-to-br from-neon-violet to-neon-cobalt'
-                : result
-                ? 'bg-gradient-to-br from-neon-violet to-neon-cobalt shadow-[0_0_40px_-8px_rgba(138,43,226,0.7)]'
-                : 'bg-ink-veil ring-2 ring-white/20'
-            }`}
-          >
-            {!result && <span className="text-display text-white/40 text-3xl">🂠</span>}
-          </div>
-        )}
+        <CardFront item={frontItem} lit={lit} />
+        <CardBack />
       </div>
+    </div>
+  )
+}
+
+function CardFront({ item, lit }: { item: PackItem | null; lit: boolean }) {
+  const icon = item?.icon
+  const valueText = item?.shortLabel ?? item?.value ?? '?'
+  const isRed = icon ? RED_SUITS.has(icon) : false
+  const cornerText = valueText.length <= 3 ? valueText : ''
+
+  return (
+    <div
+      className={`absolute inset-0 rounded-2xl flex flex-col items-center justify-center px-3 text-display ${
+        lit
+          ? 'bg-white text-gray-900 shadow-[0_0_50px_-10px_rgba(255,43,214,0.55)]'
+          : 'bg-ink-veil ring-2 ring-white/20 text-white/40'
+      }`}
+      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+    >
+      {cornerText && (
+        <span className={`absolute top-2 left-3 text-sm ${isRed ? 'text-red-600' : ''}`}>
+          {cornerText}
+        </span>
+      )}
+      {icon ? (
+        <>
+          <span className={`text-6xl leading-none ${isRed ? 'text-red-600' : ''}`}>{icon}</span>
+          {valueText && cornerText !== valueText && (
+            <span className={`mt-2 text-xl ${isRed ? 'text-red-600' : ''}`}>{valueText}</span>
+          )}
+        </>
+      ) : (
+        <span
+          className="text-center leading-tight"
+          style={{ fontSize: valueText.length > 12 ? '1rem' : valueText.length > 6 ? '1.25rem' : '1.75rem' }}
+        >
+          {valueText}
+        </span>
+      )}
+      {cornerText && (
+        <span className={`absolute bottom-2 right-3 text-sm rotate-180 ${isRed ? 'text-red-600' : ''}`}>
+          {cornerText}
+        </span>
+      )}
+    </div>
+  )
+}
+
+function CardBack() {
+  return (
+    <div
+      className="absolute inset-0 rounded-2xl flex items-center justify-center bg-gradient-to-br from-neon-violet via-neon-magenta to-neon-cobalt shadow-2xl"
+      style={{
+        transform: 'rotateY(180deg)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+      }}
+    >
+      <div className="absolute inset-2 rounded-xl ring-2 ring-white/30" />
+      <span className="text-display text-white/80 text-3xl">✦</span>
     </div>
   )
 }

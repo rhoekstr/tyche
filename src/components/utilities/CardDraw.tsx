@@ -1,14 +1,15 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { drawWithoutReplacement, initDrawState, type DrawState } from '@/utils/randomize'
+import { drawWithReplacement, drawWithoutReplacement, initDrawState, type DrawState } from '@/utils/randomize'
+import CardAnimation from '@/components/animations/CardAnimation'
+import { usePreferences } from '@/hooks/usePreferences'
 import type { PackItem } from '@/types/pack'
 
 const SUITS = ['♠', '♥', '♦', '♣'] as const
 const RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'] as const
-const RED_SUITS = new Set(['♥', '♦'])
 
 const DECK: PackItem[] = SUITS.flatMap((suit) =>
-  RANKS.map((rank) => ({ value: `${rank}${suit}` })),
+  RANKS.map((rank) => ({ value: rank, icon: suit, shortLabel: `${rank}${suit}` })),
 )
 
 function buildDeck(): DrawState {
@@ -17,33 +18,43 @@ function buildDeck(): DrawState {
 
 export default function CardDraw() {
   const stateRef = useRef<DrawState>(buildDeck())
+  const [withReplacement, setWithReplacement] = useState(false)
   const [result, setResult] = useState<PackItem | null>(null)
-  const [drawKey, setDrawKey] = useState(0)
+  const [spinId, setSpinId] = useState(0)
+  const [isSpinning, setIsSpinning] = useState(false)
   const [exhaustedWarning, setExhaustedWarning] = useState(false)
   const [remaining, setRemaining] = useState(DECK.length)
+  const { durationFor } = usePreferences()
 
   const draw = useCallback(() => {
-    if (exhaustedWarning) return
-    const r = drawWithoutReplacement(stateRef.current, DECK)
-    stateRef.current = r.state
-    setResult(r.item)
-    setDrawKey((k) => k + 1)
-    setRemaining(r.state.remaining.length)
-    if (r.poolExhausted) setExhaustedWarning(true)
-  }, [exhaustedWarning])
+    if (isSpinning || exhaustedWarning) return
+    let nextItem: PackItem | null = null
+    if (withReplacement) {
+      nextItem = drawWithReplacement(DECK)
+    } else {
+      const r = drawWithoutReplacement(stateRef.current, DECK)
+      stateRef.current = r.state
+      nextItem = r.item
+      setRemaining(r.state.remaining.length)
+      if (r.poolExhausted) setExhaustedWarning(true)
+    }
+    if (!nextItem) return
+    setResult(nextItem)
+    setSpinId((n) => n + 1)
+    setIsSpinning(true)
+  }, [isSpinning, exhaustedWarning, withReplacement])
 
   const reshuffle = useCallback(() => {
     stateRef.current = buildDeck()
     setResult(null)
-    setDrawKey((k) => k + 1)
+    setSpinId((n) => n + 1)
     setRemaining(DECK.length)
     setExhaustedWarning(false)
+    setIsSpinning(false)
   }, [])
 
-  const cardValue = result?.value ?? ''
-  const suit = cardValue.slice(-1)
-  const rank = cardValue.slice(0, -1)
-  const isRed = RED_SUITS.has(suit)
+  const handleComplete = useCallback(() => setIsSpinning(false), [])
+  const duration = useMemo(() => durationFor('card'), [durationFor])
 
   return (
     <section className="mx-auto max-w-sm pt-6 text-center">
@@ -52,34 +63,46 @@ export default function CardDraw() {
       </Link>
 
       <h2 className="mt-6 text-display text-3xl text-white">Card Draw</h2>
-      <p className="mt-1 text-sm text-white/60">
-        {remaining} / {DECK.length} remaining ·{' '}
-        <button type="button" className="underline hover:text-white" onClick={reshuffle}>
-          Reshuffle
-        </button>
-      </p>
 
-      <div className="mt-10 flex items-center justify-center">
-        <div
-          key={drawKey}
-          className={`w-36 h-52 rounded-2xl flex flex-col items-center justify-center transition-all shadow-xl ${
-            result
-              ? 'bg-white'
-              : 'bg-ink-veil ring-2 ring-white/20'
-          }`}
-        >
-          {result ? (
-            <div className={`flex flex-col items-center gap-1 ${isRed ? 'text-red-500' : 'text-gray-900'}`}>
-              <span className="text-display text-3xl font-bold">{rank}</span>
-              <span className="text-5xl leading-none">{suit}</span>
-            </div>
-          ) : (
-            <span className="text-display text-4xl text-white/40">🂠</span>
-          )}
-        </div>
+      <div className="mt-3 flex items-center justify-center gap-4 text-sm">
+        <label className="flex items-center gap-2 text-white/70 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={withReplacement}
+            onChange={(e) => {
+              setWithReplacement(e.target.checked)
+              if (e.target.checked) {
+                setExhaustedWarning(false)
+              }
+            }}
+            disabled={isSpinning}
+            className="accent-neon-magenta w-4 h-4"
+          />
+          With replacement
+        </label>
       </div>
 
-      {exhaustedWarning && (
+      {!withReplacement && (
+        <p className="mt-2 text-xs text-white/50">
+          {remaining} / {DECK.length} remaining ·{' '}
+          <button type="button" className="underline hover:text-white" onClick={reshuffle}>
+            Reshuffle
+          </button>
+        </p>
+      )}
+
+      <div className="mt-8">
+        <CardAnimation
+          pool={DECK}
+          result={result}
+          spinId={spinId}
+          isSpinning={isSpinning}
+          onComplete={handleComplete}
+          durationMs={duration}
+        />
+      </div>
+
+      {exhaustedWarning && !withReplacement && (
         <p className="mt-4 text-neon-orange text-sm">
           Deck exhausted.{' '}
           <button type="button" className="underline hover:text-white" onClick={reshuffle}>
@@ -91,10 +114,10 @@ export default function CardDraw() {
       <button
         type="button"
         onClick={draw}
-        disabled={exhaustedWarning}
+        disabled={isSpinning || (exhaustedWarning && !withReplacement)}
         className="mt-8 text-display text-xl uppercase tracking-widest px-10 py-4 rounded-full bg-gradient-to-r from-neon-pink to-neon-magenta text-white shadow-[0_0_40px_-8px_rgba(255,43,214,0.7)] hover:brightness-110 active:scale-95 transition disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        {result ? 'Draw Again' : 'Draw'}
+        {isSpinning ? 'Drawing…' : result ? 'Draw Again' : 'Draw'}
       </button>
     </section>
   )

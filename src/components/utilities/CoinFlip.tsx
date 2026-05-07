@@ -4,7 +4,10 @@ import CoinAnimation from '@/components/animations/CoinAnimation'
 import { usePreferences } from '@/hooks/usePreferences'
 import type { PackItem } from '@/types/pack'
 
-const POOL: PackItem[] = [{ value: 'HEADS' }, { value: 'TAILS' }]
+const POOL: PackItem[] = [
+  { value: 'HEADS', icon: '👑' },
+  { value: 'TAILS', icon: '🦅' },
+]
 
 export default function CoinFlip() {
   const [result, setResult] = useState<PackItem | null>(null)

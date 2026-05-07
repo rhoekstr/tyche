@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { registerPack } from '@/hooks/usePacks'
 import { storageGet, storageSet } from '@/utils/storage'
+import { inferDefaultAnimation } from '@/utils/inferAnimation'
 import type { Pack, PackItem } from '@/types/pack'
 
 const CUSTOM_PACKS_KEY = 'custom-packs'
@@ -47,7 +48,7 @@ export default function CustomPackBuilder() {
         title: title.trim(),
         description: description.trim(),
         icon: icon.trim() || '📋',
-        defaultAnimation: 'slot',
+        defaultAnimation: inferDefaultAnimation(items.length),
         tags: ['custom'],
         hierarchy: { level1: 'Custom', level2: title.trim() },
         source: 'custom',
@@ -76,6 +77,9 @@ export default function CustomPackBuilder() {
         return
       }
       pack.meta.source = 'custom'
+      if (!pack.meta.defaultAnimation) {
+        pack.meta.defaultAnimation = inferDefaultAnimation(pack.items.length)
+      }
       saveCustomPack(pack)
       setSavedPacks(loadCustomPacks())
       setSaved(true)

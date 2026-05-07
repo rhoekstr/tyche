@@ -1,14 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useManifest, usePack } from '@/hooks/usePacks'
 import { useMultiRandomizer } from '@/hooks/useMultiRandomizer'
 import { defaultActiveFilters } from '@/utils/randomize'
 import { storageGet, storageSet } from '@/utils/storage'
+import { ensureUtilityPacksRegistered, UTILITY_PACK_OPTIONS } from '@/utils/utilityPacks'
 import AnimationStage from '@/components/animations/AnimationStage'
 import type { MultiSlotConfig, SlotConfig } from '@/types/config'
 import type { AnimationMode } from '@/types/pack'
 
 const SAVED_KEY = 'multi-configs'
+
+const ANIMATION_OPTIONS: { mode: AnimationMode; emoji: string; label: string }[] = [
+  { mode: 'slot', emoji: '🎰', label: 'Slot' },
+  { mode: 'coin', emoji: '🪙', label: 'Coin' },
+  { mode: 'dice', emoji: '🎲', label: 'Dice' },
+  { mode: 'card', emoji: '🃏', label: 'Card' },
+  { mode: 'rps', emoji: '✊', label: 'RPS' },
+]
+
+ensureUtilityPacksRegistered()
 
 export default function MultiSlot() {
   const { manifest } = useManifest()
@@ -19,6 +30,19 @@ export default function MultiSlot() {
   )
   const [showSaved, setShowSaved] = useState(false)
 
+  const packOptions = useMemo(() => {
+    const fromManifest = manifest?.packs.map((p) => ({
+      id: p.id,
+      label: p.meta.title,
+      icon: p.meta.icon,
+      group: 'Lists' as const,
+    })) ?? []
+    return [
+      ...UTILITY_PACK_OPTIONS.map((u) => ({ ...u, group: 'Utilities' as const })),
+      ...fromManifest,
+    ]
+  }, [manifest])
+
   function saveConfig() {
     if (!configName.trim()) return
     const config: MultiSlotConfig = {
@@ -28,6 +52,7 @@ export default function MultiSlot() {
         id: s.id,
         packId: s.packId ?? '',
         filters: s.activeFilters,
+        animation: s.animation ?? undefined,
       })),
       createdAt: Date.now(),
       updatedAt: Date.now(),
@@ -94,9 +119,8 @@ export default function MultiSlot() {
       </div>
 
       <h2 className="text-display text-3xl text-white mb-2">Multi-Slot</h2>
-      <p className="text-white/60 text-sm mb-8">Spin up to 8 lists at once for combo decisions.</p>
+      <p className="text-white/60 text-sm mb-8">Spin up to 8 lists or utilities at once for combo decisions.</p>
 
-      {/* Saved configs panel */}
       {showSaved && (
         <div className="mb-8 rounded-2xl bg-ink-veil ring-1 ring-white/10 p-5">
           <div className="flex items-center justify-between mb-4">
@@ -130,17 +154,19 @@ export default function MultiSlot() {
         </div>
       )}
 
-      {/* Slots */}
       <div className="space-y-4">
         {multi.slots.map((slot, idx) => (
           <SlotCard
             key={slot.id}
             slot={slot}
             index={idx}
-            packOptions={manifest?.packs.map((p) => ({ id: p.id, label: p.meta.title, icon: p.meta.icon })) ?? []}
+            packOptions={packOptions}
             onPackChange={(packId, pack) => {
               const filters = pack ? defaultActiveFilters(pack) : {}
-              multi.updateSlot(slot.id, { packId, pack, activeFilters: filters })
+              multi.updateSlot(slot.id, { packId, pack, activeFilters: filters, animation: null })
+            }}
+            onAnimationChange={(animation) => {
+              multi.updateSlot(slot.id, { animation })
             }}
             onRemove={multi.slots.length > 1 ? () => multi.removeSlot(slot.id) : undefined}
           />
@@ -157,7 +183,6 @@ export default function MultiSlot() {
         </button>
       )}
 
-      {/* Results */}
       {multi.slots.some((s) => s.result) && (
         <div className="mt-10">
           <h3 className="text-display text-xl uppercase tracking-widest text-neon-acid mb-6 text-center">Result</h3>
@@ -168,7 +193,7 @@ export default function MultiSlot() {
                   <p className="text-xs uppercase tracking-widest text-white/60">{slot.pack.meta.icon} {slot.pack.meta.title}</p>
                 )}
                 <AnimationStage
-                  mode={(slot.pack?.meta.defaultAnimation ?? 'slot') as AnimationMode}
+                  mode={slot.animation ?? slot.pack?.meta.defaultAnimation ?? 'slot'}
                   pool={slot.pack ? slot.pack.items : []}
                   result={slot.result}
                   spinId={slot.spinId}
@@ -181,7 +206,6 @@ export default function MultiSlot() {
         </div>
       )}
 
-      {/* Spin + save */}
       <div className="mt-10 flex flex-col items-center gap-4">
         <button
           type="button"
@@ -215,32 +239,42 @@ export default function MultiSlot() {
   )
 }
 
-// ── Slot card ─────────────────────────────────────────────────────────────────
+interface PackOption {
+  id: string
+  label: string
+  icon: string
+  group: 'Utilities' | 'Lists'
+}
 
 function SlotCard({
   slot,
   index,
   packOptions,
   onPackChange,
+  onAnimationChange,
   onRemove,
 }: {
   slot: ReturnType<typeof useMultiRandomizer>['slots'][number]
   index: number
-  packOptions: { id: string; label: string; icon: string }[]
+  packOptions: PackOption[]
   onPackChange: (packId: string, pack: import('@/types/pack').Pack | null) => void
+  onAnimationChange: (animation: AnimationMode | null) => void
   onRemove?: () => void
 }) {
   const { pack } = usePack(slot.packId)
 
-  // When pack data arrives, sync it into the multi-slot state
   useEffect(() => {
     if (pack && pack.id === slot.packId && slot.pack?.id !== pack.id) {
       onPackChange(pack.id, pack)
     }
   }, [pack, slot.packId, slot.pack, onPackChange])
 
+  const utilities = packOptions.filter((p) => p.group === 'Utilities')
+  const lists = packOptions.filter((p) => p.group === 'Lists')
+  const effectiveAnimation = slot.animation ?? slot.pack?.meta.defaultAnimation ?? 'slot'
+
   return (
-    <div className="flex items-center gap-4 p-4 rounded-2xl bg-ink-soft/60 ring-1 ring-white/10">
+    <div className="flex items-center gap-3 p-4 rounded-2xl bg-ink-soft/60 ring-1 ring-white/10">
       <div className="text-display text-neon-violet/60 text-sm w-6 text-center shrink-0">
         {index + 1}
       </div>
@@ -250,15 +284,40 @@ function SlotCard({
         onChange={(e) => {
           const val = e.target.value
           if (!val) { onPackChange('', null); return }
-          onPackChange(val, null) // pack data arrives via usePack in effect
+          onPackChange(val, null)
         }}
-        className="flex-1 bg-ink-veil text-white text-sm rounded-xl px-3 py-2 ring-1 ring-white/15 focus:ring-neon-violet outline-none appearance-none cursor-pointer"
+        className="flex-1 min-w-0 bg-ink-veil text-white text-sm rounded-xl px-3 py-2 ring-1 ring-white/15 focus:ring-neon-violet outline-none cursor-pointer"
       >
-        <option value="">Select a list…</option>
-        {packOptions.map((opt) => (
-          <option key={opt.id} value={opt.id}>
-            {opt.icon} {opt.label}
-          </option>
+        <option value="">Select…</option>
+        {utilities.length > 0 && (
+          <optgroup label="Utilities">
+            {utilities.map((opt) => (
+              <option key={opt.id} value={opt.id}>{opt.icon} {opt.label}</option>
+            ))}
+          </optgroup>
+        )}
+        {lists.length > 0 && (
+          <optgroup label="Lists">
+            {lists.map((opt) => (
+              <option key={opt.id} value={opt.id}>{opt.icon} {opt.label}</option>
+            ))}
+          </optgroup>
+        )}
+      </select>
+
+      <select
+        value={slot.animation ?? ''}
+        onChange={(e) => {
+          const val = e.target.value
+          onAnimationChange(val ? (val as AnimationMode) : null)
+        }}
+        disabled={!slot.packId}
+        title={`Animation: ${slot.animation ? 'override' : `auto (${effectiveAnimation})`}`}
+        className="bg-ink-veil text-white text-sm rounded-xl px-2 py-2 ring-1 ring-white/15 focus:ring-neon-violet outline-none cursor-pointer disabled:opacity-40 shrink-0"
+      >
+        <option value="">Auto</option>
+        {ANIMATION_OPTIONS.map((opt) => (
+          <option key={opt.mode} value={opt.mode}>{opt.emoji} {opt.label}</option>
         ))}
       </select>
 

@@ -1,4 +1,4 @@
-export type AnimationMode = 'slot' | 'coin' | 'dice' | 'card'
+export type AnimationMode = 'slot' | 'coin' | 'dice' | 'card' | 'rps'
 
 export type PackSource = 'official' | 'custom'
 
@@ -32,6 +32,10 @@ export type FilterValues = Record<string, string[]>
 
 export interface PackItem {
   value: string
+  /** Optional emoji or short symbol shown on small faces (coin, dice, RPS prism). */
+  icon?: string
+  /** Optional short label used when `value` is too long for a face. */
+  shortLabel?: string
   filters?: FilterValues
 }
 

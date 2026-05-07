@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { PackItem } from '@/types/pack'
+import { faceLabel } from '@/utils/faceText'
 
 interface Props {
   pool: PackItem[]
@@ -11,7 +12,6 @@ interface Props {
 }
 
 const TOTAL_ROTATION = 1440
-
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 
 export default function CoinAnimation({
@@ -25,24 +25,22 @@ export default function CoinAnimation({
   const completeFiredRef = useRef(false)
   const rafRef = useRef<number>(0)
   const coinRef = useRef<HTMLDivElement>(null)
-  const [frontValue, setFrontValue] = useState<string>(result?.value ?? '?')
-  const [backValue, setBackValue] = useState<string>('?')
+  const [frontItem, setFrontItem] = useState<PackItem | null>(result)
+  const [backItem, setBackItem] = useState<PackItem | null>(null)
 
   useEffect(() => {
     if (!isSpinning || !result) {
-      setFrontValue(result?.value ?? '?')
+      setFrontItem(result)
       if (coinRef.current) coinRef.current.style.transform = 'rotateY(0deg)'
       return
     }
     completeFiredRef.current = false
 
-    const pickValue = (): string =>
-      pool.length > 0
-        ? (pool[Math.floor(Math.random() * pool.length)]?.value ?? result.value)
-        : result.value
+    const pickItem = (): PackItem =>
+      pool.length > 0 ? (pool[Math.floor(Math.random() * pool.length)] ?? result) : result
 
-    setFrontValue(pickValue())
-    setBackValue(pickValue())
+    setFrontItem(pickItem())
+    setBackItem(pickItem())
 
     const start = performance.now()
     let lastPhase = 0
@@ -55,14 +53,14 @@ export default function CoinAnimation({
       const phase = Math.floor(rot / 180)
       if (phase !== lastPhase) {
         lastPhase = phase
-        if (phase % 2 === 1) setFrontValue(pickValue())
-        else setBackValue(pickValue())
+        if (phase % 2 === 1) setFrontItem(pickItem())
+        else setBackItem(pickItem())
       }
 
       if (t < 1) {
         rafRef.current = requestAnimationFrame(frame)
       } else {
-        setFrontValue(result.value)
+        setFrontItem(result)
         if (coinRef.current) coinRef.current.style.transform = `rotateY(${TOTAL_ROTATION}deg)`
         if (!completeFiredRef.current) {
           completeFiredRef.current = true
@@ -84,8 +82,8 @@ export default function CoinAnimation({
         className="relative w-48 h-48 will-change-transform"
         style={{ transformStyle: 'preserve-3d', transform: 'rotateY(0deg)' }}
       >
-        <CoinFace side="front" value={frontValue} lit={lit} />
-        <CoinFace side="back" value={backValue} lit={lit} />
+        <CoinFace side="front" item={frontItem} lit={lit} />
+        <CoinFace side="back" item={backItem} lit={lit} />
       </div>
     </div>
   )
@@ -93,17 +91,18 @@ export default function CoinAnimation({
 
 function CoinFace({
   side,
-  value,
+  item,
   lit,
 }: {
   side: 'front' | 'back'
-  value: string
+  item: PackItem | null
   lit: boolean
 }) {
-  const fontSize = value.length > 10 ? '1rem' : value.length > 6 ? '1.25rem' : '1.625rem'
+  const { text, fontSize } = faceLabel(item, { maxChars: 8, sizes: ['1.625rem', '1.25rem', '1rem'] })
+  const icon = item?.icon
   return (
     <div
-      className={`absolute inset-0 rounded-full flex items-center justify-center text-display text-center px-5 leading-tight ${
+      className={`absolute inset-0 rounded-full flex flex-col items-center justify-center text-display text-center px-5 leading-tight gap-1 ${
         lit
           ? 'bg-gradient-to-br from-neon-yellow via-neon-orange to-neon-magenta text-ink shadow-[0_0_60px_-8px_rgba(255,240,78,0.8)]'
           : 'bg-ink-veil ring-2 ring-white/20 text-white/40'
@@ -112,10 +111,14 @@ function CoinFace({
         transform: side === 'front' ? 'rotateY(0deg)' : 'rotateY(180deg)',
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        fontSize,
       }}
     >
-      <span className="line-clamp-3">{value}</span>
+      {icon && <span className="text-4xl leading-none">{icon}</span>}
+      {text && (
+        <span style={{ fontSize }} className="line-clamp-2">
+          {text}
+        </span>
+      )}
     </div>
   )
 }
