@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import DiceAnimation from '@/components/animations/DiceAnimation'
 import ResultLabel from '@/components/animations/ResultLabel'
 import { usePreferences } from '@/hooks/usePreferences'
+import { useSound } from '@/hooks/useSound'
 import type { PackItem } from '@/types/pack'
 
 const PRESETS = [4, 6, 8, 10, 12, 20] as const
@@ -14,6 +15,7 @@ export default function DiceRoll() {
   const [spinId, setSpinId] = useState(0)
   const [isSpinning, setIsSpinning] = useState(false)
   const { durationFor } = usePreferences()
+  const sound = useSound()
 
   const activeSides = customInput
     ? Math.max(2, Math.min(1000, parseInt(customInput, 10) || 6))
@@ -26,12 +28,16 @@ export default function DiceRoll() {
 
   const roll = useCallback(() => {
     if (isSpinning) return
+    sound.playSpin()
     setResult({ value: String(Math.floor(Math.random() * activeSides) + 1) })
     setSpinId((n) => n + 1)
     setIsSpinning(true)
-  }, [isSpinning, activeSides])
+  }, [isSpinning, activeSides, sound])
 
-  const handleComplete = useCallback(() => setIsSpinning(false), [])
+  const handleComplete = useCallback(() => {
+    sound.playLand()
+    setIsSpinning(false)
+  }, [sound])
 
   const duration = useMemo(() => durationFor('dice'), [durationFor])
 

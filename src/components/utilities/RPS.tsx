@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import RPSAnimation from '@/components/animations/RPSAnimation'
 import ResultLabel from '@/components/animations/ResultLabel'
 import { usePreferences } from '@/hooks/usePreferences'
+import { useSound } from '@/hooks/useSound'
 import type { PackItem } from '@/types/pack'
 
 const POOL: PackItem[] = [
@@ -16,15 +17,20 @@ export default function RPS() {
   const [spinId, setSpinId] = useState(0)
   const [isSpinning, setIsSpinning] = useState(false)
   const { durationFor } = usePreferences()
+  const sound = useSound()
 
   const pick = useCallback(() => {
     if (isSpinning) return
+    sound.playSpin()
     setResult(POOL[Math.floor(Math.random() * POOL.length)]!)
     setSpinId((n) => n + 1)
     setIsSpinning(true)
-  }, [isSpinning])
+  }, [isSpinning, sound])
 
-  const handleComplete = useCallback(() => setIsSpinning(false), [])
+  const handleComplete = useCallback(() => {
+    sound.playLand()
+    setIsSpinning(false)
+  }, [sound])
   const duration = useMemo(() => durationFor('rps'), [durationFor])
 
   return (

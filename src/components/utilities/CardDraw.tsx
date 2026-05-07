@@ -4,6 +4,7 @@ import { drawWithReplacement, drawWithoutReplacement, initDrawState, type DrawSt
 import CardAnimation from '@/components/animations/CardAnimation'
 import ResultLabel from '@/components/animations/ResultLabel'
 import { usePreferences } from '@/hooks/usePreferences'
+import { useSound } from '@/hooks/useSound'
 import type { PackItem } from '@/types/pack'
 
 const SUITS = ['♠', '♥', '♦', '♣'] as const
@@ -26,6 +27,7 @@ export default function CardDraw() {
   const [exhaustedWarning, setExhaustedWarning] = useState(false)
   const [remaining, setRemaining] = useState(DECK.length)
   const { durationFor } = usePreferences()
+  const sound = useSound()
 
   const draw = useCallback(() => {
     if (isSpinning || exhaustedWarning) return
@@ -40,10 +42,11 @@ export default function CardDraw() {
       if (r.poolExhausted) setExhaustedWarning(true)
     }
     if (!nextItem) return
+    sound.playSpin()
     setResult(nextItem)
     setSpinId((n) => n + 1)
     setIsSpinning(true)
-  }, [isSpinning, exhaustedWarning, withReplacement])
+  }, [isSpinning, exhaustedWarning, withReplacement, sound])
 
   const reshuffle = useCallback(() => {
     stateRef.current = buildDeck()
@@ -54,7 +57,10 @@ export default function CardDraw() {
     setIsSpinning(false)
   }, [])
 
-  const handleComplete = useCallback(() => setIsSpinning(false), [])
+  const handleComplete = useCallback(() => {
+    sound.playLand()
+    setIsSpinning(false)
+  }, [sound])
   const duration = useMemo(() => durationFor('card'), [durationFor])
 
   return (

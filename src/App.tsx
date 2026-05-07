@@ -9,6 +9,7 @@ import CoinFlip from '@/components/utilities/CoinFlip'
 import DiceRoll from '@/components/utilities/DiceRoll'
 import RPS from '@/components/utilities/RPS'
 import CardDraw from '@/components/utilities/CardDraw'
+import SlotPicker from '@/components/utilities/SlotPicker'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/utility/dice" element={<DiceRoll />} />
         <Route path="/utility/rps" element={<RPS />} />
         <Route path="/utility/card" element={<CardDraw />} />
+        <Route path="/utility/slot" element={<SlotPicker />} />
       </Routes>
     </Shell>
   )

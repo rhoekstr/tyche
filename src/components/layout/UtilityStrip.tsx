@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 export const UTILITIES = [
+  { path: '/utility/slot', emoji: '🎰', label: 'Slot' },
   { path: '/utility/coin', emoji: '🪙', label: 'Coin' },
   { path: '/utility/dice', emoji: '🎲', label: 'Dice' },
   { path: '/utility/rps', emoji: '✂️', label: 'RPS' },

@@ -227,9 +227,9 @@ export default function CustomPackBuilder() {
         ← Home
       </Link>
 
-      <h2 className="mt-6 text-display text-3xl text-white">Custom Packs</h2>
+      <h2 className="mt-6 text-display text-3xl text-white">New List</h2>
       <p className="mt-2 text-white/60 text-sm">
-        Build a custom list with optional icons, short labels, and filters — or import a pack JSON file.
+        Build a list with optional icons, short labels, and filters — or import a pack JSON file.
       </p>
 
       <div className="mt-6 flex gap-2">
@@ -492,7 +492,7 @@ export default function CustomPackBuilder() {
 
       {savedPacks.length > 0 && (
         <div className="mt-10">
-          <h3 className="text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Your Custom Packs</h3>
+          <h3 className="text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Your Lists</h3>
           <ul className="space-y-3">
             {savedPacks.map((pack) => (
               <li key={pack.id} className="flex items-center gap-4 p-4 rounded-2xl bg-ink-veil ring-1 ring-white/10">

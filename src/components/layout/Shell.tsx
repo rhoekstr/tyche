@@ -14,8 +14,8 @@ export default function Shell({ children }: { children: ReactNode }) {
           </h1>
         </Link>
         <div className="hidden md:flex items-center gap-2 ml-1">
-          <NavPill to="/multi" active={pathname === '/multi'}>🎰 Multi-Slot</NavPill>
-          <NavPill to="/custom" active={pathname === '/custom'}>✏️ Custom</NavPill>
+          <NavPill to="/multi" active={pathname === '/multi'}>🎲 Custom Roll</NavPill>
+          <NavPill to="/custom" active={pathname === '/custom'}>✏️ New List</NavPill>
           <NavPill to="/settings" active={pathname === '/settings'}>⚙️ Settings</NavPill>
         </div>
       </header>

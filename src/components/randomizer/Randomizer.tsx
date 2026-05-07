@@ -4,6 +4,7 @@ import { usePack } from '@/hooks/usePacks'
 import { useRandomizer } from '@/hooks/useRandomizer'
 import { useFilters } from '@/hooks/useFilters'
 import { usePreferences } from '@/hooks/usePreferences'
+import { useSound } from '@/hooks/useSound'
 import AnimationStage from '@/components/animations/AnimationStage'
 import AnimationPicker from '@/components/animations/AnimationPicker'
 import ResultLabel from '@/components/animations/ResultLabel'
@@ -20,6 +21,16 @@ export default function Randomizer() {
   const [animMode, setAnimMode] = useState<AnimationMode | null>(null)
   const effectiveMode: AnimationMode = animMode ?? pack?.meta.defaultAnimation ?? 'slot'
   const { durationFor } = usePreferences()
+  const sound = useSound()
+
+  const handleSpin = () => {
+    sound.playSpin()
+    randomizer.spin()
+  }
+  const handleComplete = () => {
+    sound.playLand()
+    randomizer.markSpinComplete()
+  }
 
   if (loading) return <Status>Loading pack…</Status>
   if (error) return <Status tone="error">Failed to load: {error.message}</Status>
@@ -60,7 +71,7 @@ export default function Randomizer() {
           result={randomizer.result}
           spinId={randomizer.spinId}
           isSpinning={randomizer.isSpinning}
-          onComplete={randomizer.markSpinComplete}
+          onComplete={handleComplete}
           durationMs={durationFor(effectiveMode)}
         />
         {effectiveMode !== 'slot' && (
@@ -71,7 +82,7 @@ export default function Randomizer() {
       <div className="mt-8 flex flex-col items-center gap-4">
         <button
           type="button"
-          onClick={randomizer.spin}
+          onClick={handleSpin}
           disabled={!randomizer.canSpin}
           className={`text-display text-xl uppercase tracking-widest px-10 py-4 rounded-full bg-gradient-to-r from-neon-magenta via-neon-violet to-neon-cobalt text-white hover:brightness-110 active:scale-95 transition disabled:opacity-40 disabled:cursor-not-allowed ${
             randomizer.isSpinning ? 'btn-spin-active' : 'shadow-[0_0_40px_-8px_rgba(255,43,214,0.8)]'

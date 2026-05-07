@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useManifest, usePack } from '@/hooks/usePacks'
 import { useMultiRandomizer } from '@/hooks/useMultiRandomizer'
@@ -7,8 +7,9 @@ import { storageGet, storageSet } from '@/utils/storage'
 import { ensureUtilityPacksRegistered, UTILITY_PACK_OPTIONS } from '@/utils/utilityPacks'
 import AnimationStage from '@/components/animations/AnimationStage'
 import ResultLabel from '@/components/animations/ResultLabel'
+import { useSound } from '@/hooks/useSound'
 import type { MultiSlotConfig, SlotConfig } from '@/types/config'
-import type { AnimationMode } from '@/types/pack'
+import type { AnimationMode, FilterValues, Pack } from '@/types/pack'
 
 const SAVED_KEY = 'multi-configs'
 
@@ -25,19 +26,35 @@ ensureUtilityPacksRegistered()
 export default function MultiSlot() {
   const { manifest } = useManifest()
   const multi = useMultiRandomizer(2)
+  const sound = useSound()
   const [configName, setConfigName] = useState('')
   const [savedConfigs, setSavedConfigs] = useState<MultiSlotConfig[]>(
     () => storageGet<MultiSlotConfig[]>(SAVED_KEY) ?? [],
   )
   const [showSaved, setShowSaved] = useState(false)
 
-  const packOptions = useMemo(() => {
-    const fromManifest = manifest?.packs.map((p) => ({
-      id: p.id,
-      label: p.meta.title,
-      icon: p.meta.icon,
-      group: 'Lists' as const,
-    })) ?? []
+  // Play landing sound when all spins complete
+  const wasSpinningRef = useRef(false)
+  useEffect(() => {
+    if (wasSpinningRef.current && !multi.isAnySpinning) {
+      sound.playLand()
+    }
+    wasSpinningRef.current = multi.isAnySpinning
+  }, [multi.isAnySpinning, sound])
+
+  const handleSpin = () => {
+    sound.playSpin()
+    multi.spin()
+  }
+
+  const packOptions = useMemo<PackOption[]>(() => {
+    const fromManifest =
+      manifest?.packs.map((p) => ({
+        id: p.id,
+        label: p.meta.title,
+        icon: p.meta.icon,
+        group: 'Lists' as const,
+      })) ?? []
     return [
       ...UTILITY_PACK_OPTIONS.map((u) => ({ ...u, group: 'Utilities' as const })),
       ...fromManifest,
@@ -119,8 +136,8 @@ export default function MultiSlot() {
         </button>
       </div>
 
-      <h2 className="text-display text-3xl text-white mb-2">Multi-Slot</h2>
-      <p className="text-white/60 text-sm mb-8">Spin up to 8 lists or utilities at once for combo decisions.</p>
+      <h2 className="text-display text-3xl text-white mb-2">Custom Roll</h2>
+      <p className="text-white/60 text-sm mb-8">Combine up to 8 lists or utilities and spin them together.</p>
 
       {showSaved && (
         <div className="mb-8 rounded-2xl bg-ink-veil ring-1 ring-white/10 p-5">
@@ -155,7 +172,7 @@ export default function MultiSlot() {
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {multi.slots.map((slot, idx) => (
           <SlotCard
             key={slot.id}
@@ -168,6 +185,9 @@ export default function MultiSlot() {
             }}
             onAnimationChange={(animation) => {
               multi.updateSlot(slot.id, { animation })
+            }}
+            onFiltersChange={(activeFilters) => {
+              multi.updateSlot(slot.id, { activeFilters })
             }}
             onRemove={multi.slots.length > 1 ? () => multi.removeSlot(slot.id) : undefined}
           />
@@ -214,11 +234,11 @@ export default function MultiSlot() {
       <div className="mt-10 flex flex-col items-center gap-4">
         <button
           type="button"
-          onClick={multi.spin}
+          onClick={handleSpin}
           disabled={!multi.canSpin}
           className="text-display text-xl uppercase tracking-widest px-12 py-5 rounded-full bg-gradient-to-r from-neon-magenta via-neon-violet to-neon-cobalt text-white shadow-[0_0_50px_-8px_rgba(255,43,214,0.9)] hover:brightness-110 active:scale-95 transition disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {multi.isAnySpinning ? 'Spinning…' : 'Spin All'}
+          {multi.isAnySpinning ? 'Spinning…' : 'Roll All'}
         </button>
 
         <div className="flex gap-2 mt-2">
@@ -227,7 +247,7 @@ export default function MultiSlot() {
             value={configName}
             onChange={(e) => setConfigName(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && saveConfig()}
-            placeholder="Name this config…"
+            placeholder="Name this roll…"
             className="px-4 py-2 rounded-xl bg-ink-veil ring-1 ring-white/15 focus:ring-neon-violet outline-none text-white text-sm placeholder:text-white/40 w-52"
           />
           <button
@@ -257,16 +277,19 @@ function SlotCard({
   packOptions,
   onPackChange,
   onAnimationChange,
+  onFiltersChange,
   onRemove,
 }: {
   slot: ReturnType<typeof useMultiRandomizer>['slots'][number]
   index: number
   packOptions: PackOption[]
-  onPackChange: (packId: string, pack: import('@/types/pack').Pack | null) => void
+  onPackChange: (packId: string, pack: Pack | null) => void
   onAnimationChange: (animation: AnimationMode | null) => void
+  onFiltersChange: (filters: FilterValues) => void
   onRemove?: () => void
 }) {
   const { pack } = usePack(slot.packId)
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   useEffect(() => {
     if (pack && pack.id === slot.packId && slot.pack?.id !== pack.id) {
@@ -277,65 +300,181 @@ function SlotCard({
   const utilities = packOptions.filter((p) => p.group === 'Utilities')
   const lists = packOptions.filter((p) => p.group === 'Lists')
   const effectiveAnimation = slot.animation ?? slot.pack?.meta.defaultAnimation ?? 'slot'
+  const hasFilters = !!slot.pack?.filters && Object.keys(slot.pack.filters).length > 0
+
+  // Active filter count vs. total possible
+  const filterStats = (() => {
+    if (!slot.pack?.filters) return { active: 0, total: 0 }
+    let active = 0
+    let total = 0
+    for (const dim of Object.keys(slot.pack.filters)) {
+      const allValues = new Set<string>()
+      for (const it of slot.pack.items) for (const v of it.filters?.[dim] ?? []) allValues.add(v)
+      total += allValues.size
+      active += slot.activeFilters[dim]?.length ?? 0
+    }
+    return { active, total }
+  })()
+  const isFiltered = filterStats.active < filterStats.total
 
   return (
-    <div className="flex items-center gap-3 p-4 rounded-2xl bg-ink-soft/60 ring-1 ring-white/10">
-      <div className="text-display text-neon-violet/60 text-sm w-6 text-center shrink-0">
-        {index + 1}
-      </div>
+    <div className="rounded-2xl bg-ink-soft/60 ring-1 ring-white/10 p-3">
+      <div className="flex items-center gap-2">
+        <div className="text-display text-neon-violet/60 text-sm w-6 text-center shrink-0">
+          {index + 1}
+        </div>
 
-      <select
-        value={slot.packId ?? ''}
-        onChange={(e) => {
-          const val = e.target.value
-          if (!val) { onPackChange('', null); return }
-          onPackChange(val, null)
-        }}
-        className="flex-1 min-w-0 bg-ink-veil text-white text-sm rounded-xl px-3 py-2 ring-1 ring-white/15 focus:ring-neon-violet outline-none cursor-pointer"
-      >
-        <option value="">Select…</option>
-        {utilities.length > 0 && (
-          <optgroup label="Utilities">
-            {utilities.map((opt) => (
-              <option key={opt.id} value={opt.id}>{opt.icon} {opt.label}</option>
-            ))}
-          </optgroup>
-        )}
-        {lists.length > 0 && (
-          <optgroup label="Lists">
-            {lists.map((opt) => (
-              <option key={opt.id} value={opt.id}>{opt.icon} {opt.label}</option>
-            ))}
-          </optgroup>
-        )}
-      </select>
+        <select
+          value={slot.packId ?? ''}
+          onChange={(e) => {
+            const val = e.target.value
+            if (!val) { onPackChange('', null); return }
+            onPackChange(val, null)
+          }}
+          className="flex-1 min-w-0 bg-ink-veil text-white text-sm rounded-xl px-3 py-2 ring-1 ring-white/15 focus:ring-neon-violet outline-none cursor-pointer"
+        >
+          <option value="">Select…</option>
+          {utilities.length > 0 && (
+            <optgroup label="Utilities">
+              {utilities.map((opt) => (
+                <option key={opt.id} value={opt.id}>{opt.icon} {opt.label}</option>
+              ))}
+            </optgroup>
+          )}
+          {lists.length > 0 && (
+            <optgroup label="Lists">
+              {lists.map((opt) => (
+                <option key={opt.id} value={opt.id}>{opt.icon} {opt.label}</option>
+              ))}
+            </optgroup>
+          )}
+        </select>
 
-      <select
-        value={slot.animation ?? ''}
-        onChange={(e) => {
-          const val = e.target.value
-          onAnimationChange(val ? (val as AnimationMode) : null)
-        }}
-        disabled={!slot.packId}
-        title={`Animation: ${slot.animation ? 'override' : `auto (${effectiveAnimation})`}`}
-        className="bg-ink-veil text-white text-sm rounded-xl px-2 py-2 ring-1 ring-white/15 focus:ring-neon-violet outline-none cursor-pointer disabled:opacity-40 shrink-0"
-      >
-        <option value="">Auto</option>
-        {ANIMATION_OPTIONS.map((opt) => (
-          <option key={opt.mode} value={opt.mode}>{opt.emoji} {opt.label}</option>
-        ))}
-      </select>
-
-      {onRemove && (
         <button
           type="button"
-          onClick={onRemove}
-          className="text-white/30 hover:text-neon-pink text-lg shrink-0 leading-none"
-          aria-label="Remove slot"
+          onClick={() => setFiltersOpen((o) => !o)}
+          disabled={!hasFilters}
+          title={hasFilters ? 'Edit filters' : 'No filters available for this list'}
+          aria-label="Edit filters"
+          className={`shrink-0 w-9 h-9 rounded-xl ring-1 transition flex items-center justify-center ${
+            !hasFilters
+              ? 'opacity-30 ring-white/10 cursor-not-allowed'
+              : isFiltered
+              ? 'bg-neon-orange/20 ring-neon-orange/50 text-neon-orange'
+              : 'bg-ink-veil ring-white/15 text-white/60 hover:text-white hover:ring-white/30'
+          }`}
         >
-          ×
+          ⚙
         </button>
+
+        {onRemove && (
+          <button
+            type="button"
+            onClick={onRemove}
+            className="text-white/30 hover:text-neon-pink text-lg shrink-0 leading-none w-6 text-center"
+            aria-label="Remove slot"
+          >
+            ×
+          </button>
+        )}
+      </div>
+
+      <div className="flex items-center gap-2 mt-2 pl-8">
+        <span className="text-[10px] uppercase tracking-widest text-white/40">Anim</span>
+        <select
+          value={slot.animation ?? ''}
+          onChange={(e) => {
+            const val = e.target.value
+            onAnimationChange(val ? (val as AnimationMode) : null)
+          }}
+          disabled={!slot.packId}
+          className="bg-ink-veil text-white text-xs rounded-lg px-2 py-1 ring-1 ring-white/15 focus:ring-neon-violet outline-none cursor-pointer disabled:opacity-40"
+        >
+          <option value="">Auto ({effectiveAnimation})</option>
+          {ANIMATION_OPTIONS.map((opt) => (
+            <option key={opt.mode} value={opt.mode}>{opt.emoji} {opt.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {filtersOpen && hasFilters && slot.pack && (
+        <SlotFilterEditor
+          pack={slot.pack}
+          activeFilters={slot.activeFilters}
+          onChange={onFiltersChange}
+        />
       )}
+    </div>
+  )
+}
+
+function SlotFilterEditor({
+  pack,
+  activeFilters,
+  onChange,
+}: {
+  pack: Pack
+  activeFilters: FilterValues
+  onChange: (filters: FilterValues) => void
+}) {
+  if (!pack.filters) return null
+  const dimensions = Object.keys(pack.filters)
+
+  function toggle(dim: string, val: string, multiSelect: boolean) {
+    const current = activeFilters[dim] ?? []
+    const next = multiSelect
+      ? current.includes(val) ? current.filter((v) => v !== val) : [...current, val]
+      : current.includes(val) ? [] : [val]
+    onChange({ ...activeFilters, [dim]: next })
+  }
+  function selectAll(dim: string) {
+    const allValues = new Set<string>()
+    for (const it of pack.items) for (const v of it.filters?.[dim] ?? []) allValues.add(v)
+    onChange({ ...activeFilters, [dim]: [...allValues] })
+  }
+  function clearAll(dim: string) {
+    onChange({ ...activeFilters, [dim]: [] })
+  }
+
+  return (
+    <div className="mt-3 ml-8 rounded-xl bg-ink-veil ring-1 ring-white/10 p-3 space-y-3">
+      {dimensions.map((dim) => {
+        const def = pack.filters![dim]!
+        const allValues = Array.from(
+          new Set(pack.items.flatMap((i) => i.filters?.[dim] ?? [])),
+        ).sort()
+        const selected = new Set(activeFilters[dim] ?? [])
+        return (
+          <div key={dim}>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] uppercase tracking-widest text-white/60">{def.label}</span>
+              <div className="flex gap-2 text-[10px]">
+                <button type="button" onClick={() => selectAll(dim)} className="text-neon-cyan/80 hover:text-neon-cyan uppercase tracking-widest">All</button>
+                <button type="button" onClick={() => clearAll(dim)} className="text-white/40 hover:text-white uppercase tracking-widest">None</button>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {allValues.map((val) => {
+                const on = selected.has(val)
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => toggle(dim, val, def.multiSelect)}
+                    className={`px-2.5 py-0.5 rounded-full text-xs transition ${
+                      on
+                        ? 'bg-neon-violet/30 text-white ring-1 ring-neon-violet'
+                        : 'bg-ink-soft text-white/55 ring-1 ring-white/15 hover:text-white hover:ring-white/30'
+                    }`}
+                  >
+                    {val}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

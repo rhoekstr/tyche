@@ -60,7 +60,7 @@ export default function Settings() {
   }
 
   function clearCustomPacks() {
-    if (!confirm('Delete all custom packs? This cannot be undone.')) return
+    if (!confirm('Delete all custom lists? This cannot be undone.')) return
     customPacks.forEach((p) => deleteCustomPack(p.id))
     window.location.reload()
   }
@@ -119,8 +119,8 @@ export default function Settings() {
 
         {/* Custom packs */}
         <SettingRow
-          label="Custom Packs"
-          description={`${customPacks.length} custom pack${customPacks.length !== 1 ? 's' : ''} saved`}
+          label="Your Lists"
+          description={`${customPacks.length} custom list${customPacks.length !== 1 ? 's' : ''} saved`}
         >
           <div className="flex gap-3">
             <Link
