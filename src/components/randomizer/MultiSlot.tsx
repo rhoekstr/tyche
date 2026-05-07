@@ -6,6 +6,7 @@ import { defaultActiveFilters } from '@/utils/randomize'
 import { storageGet, storageSet } from '@/utils/storage'
 import { ensureUtilityPacksRegistered, UTILITY_PACK_OPTIONS } from '@/utils/utilityPacks'
 import AnimationStage from '@/components/animations/AnimationStage'
+import ResultLabel from '@/components/animations/ResultLabel'
 import type { MultiSlotConfig, SlotConfig } from '@/types/config'
 import type { AnimationMode } from '@/types/pack'
 
@@ -187,21 +188,25 @@ export default function MultiSlot() {
         <div className="mt-10">
           <h3 className="text-display text-xl uppercase tracking-widest text-neon-acid mb-6 text-center">Result</h3>
           <div className="grid gap-4 sm:grid-cols-2">
-            {multi.slots.filter((s) => s.packId).map((slot) => (
-              <div key={slot.id} className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-ink-veil ring-1 ring-white/10">
-                {slot.pack && (
-                  <p className="text-xs uppercase tracking-widest text-white/60">{slot.pack.meta.icon} {slot.pack.meta.title}</p>
-                )}
-                <AnimationStage
-                  mode={slot.animation ?? slot.pack?.meta.defaultAnimation ?? 'slot'}
-                  pool={slot.pack ? slot.pack.items : []}
-                  result={slot.result}
-                  spinId={slot.spinId}
-                  isSpinning={slot.isSpinning}
-                  onComplete={() => {}}
-                />
-              </div>
-            ))}
+            {multi.slots.filter((s) => s.packId).map((slot) => {
+              const mode = slot.animation ?? slot.pack?.meta.defaultAnimation ?? 'slot'
+              return (
+                <div key={slot.id} className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-ink-veil ring-1 ring-white/10">
+                  {slot.pack && (
+                    <p className="text-xs uppercase tracking-widest text-white/60">{slot.pack.meta.icon} {slot.pack.meta.title}</p>
+                  )}
+                  <AnimationStage
+                    mode={mode}
+                    pool={slot.pack ? slot.pack.items : []}
+                    result={slot.result}
+                    spinId={slot.spinId}
+                    isSpinning={slot.isSpinning}
+                    onComplete={() => {}}
+                  />
+                  {mode !== 'slot' && <ResultLabel item={slot.result} isSpinning={slot.isSpinning} />}
+                </div>
+              )
+            })}
           </div>
         </div>
       )}

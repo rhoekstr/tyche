@@ -11,12 +11,24 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Board game marathon" }, { "value": "Bake cookies" }, { "value": "Movie marathon" },
-    { "value": "Build a blanket fort" }, { "value": "Watercolor painting" }, { "value": "Write a story" },
-    { "value": "Origami" }, { "value": "Science experiment" }, { "value": "Learn card tricks" },
-    { "value": "Puzzle day" }, { "value": "Make homemade pizza" }, { "value": "Sock puppet theater" },
-    { "value": "Scrapbook" }, { "value": "Write letters to friends" }, { "value": "Finger knitting" },
-    { "value": "Indoor treasure hunt" }, { "value": "Learn a magic trick" }, { "value": "Comic book" }
+    { "value": "Board game marathon", "icon": "🎲" },
+    { "value": "Bake cookies", "icon": "🍪" },
+    { "value": "Movie marathon", "icon": "🎬" },
+    { "value": "Build a blanket fort", "icon": "🛖" },
+    { "value": "Watercolor painting", "icon": "🎨" },
+    { "value": "Write a story", "icon": "📝" },
+    { "value": "Origami", "icon": "🦢" },
+    { "value": "Science experiment", "icon": "🧪" },
+    { "value": "Learn card tricks", "icon": "🃏" },
+    { "value": "Puzzle day", "icon": "🧩" },
+    { "value": "Make homemade pizza", "icon": "🍕" },
+    { "value": "Sock puppet theater", "icon": "🧦" },
+    { "value": "Scrapbook", "icon": "📔" },
+    { "value": "Write letters to friends", "icon": "✉️" },
+    { "value": "Finger knitting", "icon": "🧶" },
+    { "value": "Indoor treasure hunt", "icon": "🗝️" },
+    { "value": "Learn a magic trick", "icon": "🎩" },
+    { "value": "Comic book", "icon": "💭" }
   ],
   "sampling": { "replacement": true }
 }

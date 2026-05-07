@@ -2,6 +2,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { drawWithReplacement, drawWithoutReplacement, initDrawState, type DrawState } from '@/utils/randomize'
 import CardAnimation from '@/components/animations/CardAnimation'
+import ResultLabel from '@/components/animations/ResultLabel'
 import { usePreferences } from '@/hooks/usePreferences'
 import type { PackItem } from '@/types/pack'
 
@@ -100,6 +101,7 @@ export default function CardDraw() {
           onComplete={handleComplete}
           durationMs={duration}
         />
+        <ResultLabel item={result} isSpinning={isSpinning} />
       </div>
 
       {exhaustedWarning && !withReplacement && (

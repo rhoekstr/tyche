@@ -98,7 +98,7 @@ function CoinFace({
   item: PackItem | null
   lit: boolean
 }) {
-  const { text, fontSize } = faceLabel(item, { maxChars: 8, sizes: ['1.625rem', '1.25rem', '1rem'] })
+  const { text, fontSize } = faceLabel(item, { maxChars: 14, sizes: ['1.5rem', '1.125rem', '0.875rem'] })
   const icon = item?.icon
   return (
     <div

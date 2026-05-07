@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import DiceAnimation from '@/components/animations/DiceAnimation'
+import ResultLabel from '@/components/animations/ResultLabel'
 import { usePreferences } from '@/hooks/usePreferences'
 import type { PackItem } from '@/types/pack'
 
@@ -86,6 +87,7 @@ export default function DiceRoll() {
           onComplete={handleComplete}
           durationMs={duration}
         />
+        <ResultLabel item={result} isSpinning={isSpinning} />
       </div>
 
       <p className="mt-2 text-xs uppercase tracking-widest text-white/50">d{activeSides}</p>

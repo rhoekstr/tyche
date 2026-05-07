@@ -11,12 +11,24 @@
     "source": "official", "submittedBy": null
   },
   "items": [
-    { "value": "Water balloon fight" }, { "value": "Lemonade stand" }, { "value": "Bike ride" },
-    { "value": "Backyard camping" }, { "value": "Nature scavenger hunt" }, { "value": "Paint rocks" },
-    { "value": "Make ice cream" }, { "value": "Slip 'n slide" }, { "value": "Visit a farmer's market" },
-    { "value": "Fly a kite" }, { "value": "Sidewalk chalk art" }, { "value": "Catch fireflies" },
-    { "value": "Build a fort" }, { "value": "Start a garden" }, { "value": "Visit the library" },
-    { "value": "Stargazing night" }, { "value": "Tie-dye shirts" }, { "value": "Obstacle course" }
+    { "value": "Water balloon fight", "icon": "🎈" },
+    { "value": "Lemonade stand", "icon": "🍋" },
+    { "value": "Bike ride", "icon": "🚴" },
+    { "value": "Backyard camping", "icon": "⛺" },
+    { "value": "Nature scavenger hunt", "icon": "🍃" },
+    { "value": "Paint rocks", "icon": "🪨" },
+    { "value": "Make ice cream", "icon": "🍦" },
+    { "value": "Slip 'n slide", "icon": "💦" },
+    { "value": "Visit a farmer's market", "icon": "🥕" },
+    { "value": "Fly a kite", "icon": "🪁" },
+    { "value": "Sidewalk chalk art", "icon": "🖍️" },
+    { "value": "Catch fireflies", "icon": "✨" },
+    { "value": "Build a fort", "icon": "🛖" },
+    { "value": "Start a garden", "icon": "🌱" },
+    { "value": "Visit the library", "icon": "📚" },
+    { "value": "Stargazing night", "icon": "🌟" },
+    { "value": "Tie-dye shirts", "icon": "👕" },
+    { "value": "Obstacle course", "icon": "🏃" }
   ],
   "sampling": { "replacement": true }
 }

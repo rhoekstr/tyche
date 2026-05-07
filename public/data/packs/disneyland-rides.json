@@ -19,21 +19,21 @@
     "thrillLevel": ["Low", "Moderate", "High"]
   },
   "items": [
-    { "value": "Space Mountain", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
-    { "value": "Matterhorn Bobsleds", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
-    { "value": "Big Thunder Mountain", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
-    { "value": "Haunted Mansion", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
-    { "value": "Pirates of the Caribbean", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
-    { "value": "Indiana Jones Adventure", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
-    { "value": "Star Wars: Rise of the Resistance", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
-    { "value": "Millennium Falcon: Smugglers Run", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
-    { "value": "Finding Nemo Submarine Voyage", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
-    { "value": "Guardians of the Galaxy – Mission: BREAKOUT!", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["High"] } },
-    { "value": "Radiator Springs Racers", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Moderate"] } },
-    { "value": "Incredicoaster", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["High"] } },
-    { "value": "Web Slingers", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } },
-    { "value": "Toy Story Midway Mania!", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } },
-    { "value": "Soarin' Around the World", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } }
+    { "value": "Space Mountain", "icon": "🚀", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Matterhorn Bobsleds", "icon": "🏔️", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["High"] } },
+    { "value": "Big Thunder Mountain", "icon": "⛰️", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Haunted Mansion", "icon": "👻", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Pirates of the Caribbean", "icon": "🏴‍☠️", "shortLabel": "Pirates", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Indiana Jones Adventure", "icon": "🤠", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Star Wars: Rise of the Resistance", "icon": "⚔️", "shortLabel": "Rise of Resistance", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Millennium Falcon: Smugglers Run", "icon": "🚀", "shortLabel": "Smugglers Run", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Moderate"] } },
+    { "value": "Finding Nemo Submarine Voyage", "icon": "🐠", "shortLabel": "Finding Nemo Sub", "filters": { "park": ["Disneyland Park"], "thrillLevel": ["Low"] } },
+    { "value": "Guardians of the Galaxy – Mission: BREAKOUT!", "icon": "🛸", "shortLabel": "Guardians: BREAKOUT", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["High"] } },
+    { "value": "Radiator Springs Racers", "icon": "🏎️", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Moderate"] } },
+    { "value": "Incredicoaster", "icon": "🎢", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["High"] } },
+    { "value": "Web Slingers", "icon": "🕸️", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } },
+    { "value": "Toy Story Midway Mania!", "icon": "🤠", "shortLabel": "Toy Story Mania", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } },
+    { "value": "Soarin' Around the World", "icon": "🌍", "shortLabel": "Soarin'", "filters": { "park": ["Disney California Adventure"], "thrillLevel": ["Low"] } }
   ],
   "sampling": { "replacement": true }
 }

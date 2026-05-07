@@ -6,6 +6,7 @@ import { useFilters } from '@/hooks/useFilters'
 import { usePreferences } from '@/hooks/usePreferences'
 import AnimationStage from '@/components/animations/AnimationStage'
 import AnimationPicker from '@/components/animations/AnimationPicker'
+import ResultLabel from '@/components/animations/ResultLabel'
 import FilterPanel from './FilterPanel'
 import type { AnimationMode } from '@/types/pack'
 
@@ -62,6 +63,9 @@ export default function Randomizer() {
           onComplete={randomizer.markSpinComplete}
           durationMs={durationFor(effectiveMode)}
         />
+        {effectiveMode !== 'slot' && (
+          <ResultLabel item={randomizer.result} isSpinning={randomizer.isSpinning} />
+        )}
       </div>
 
       <div className="mt-8 flex flex-col items-center gap-4">

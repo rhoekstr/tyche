@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import RPSAnimation from '@/components/animations/RPSAnimation'
+import ResultLabel from '@/components/animations/ResultLabel'
 import { usePreferences } from '@/hooks/usePreferences'
 import type { PackItem } from '@/types/pack'
 
@@ -60,6 +61,7 @@ export default function RPS() {
             onComplete={handleComplete}
             durationMs={duration}
           />
+          <ResultLabel item={result} isSpinning={isSpinning} />
         </div>
       )}
 
